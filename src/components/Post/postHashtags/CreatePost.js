@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import dotenv from 'dotenv';
 dotenv.config();
 
-import { UserContext, CheckUser } from "../../context/UserContext";
+import { UserContext, CheckUser } from "../../../context/UserContext";
 
 
 export default function CreatePost(){
