@@ -1,21 +1,31 @@
 import { useContext, useEffect, useState } from "react";
+import dotenv from 'dotenv';
+dotenv.config();
 
-import AuthContext from "../../context/AuthContext";
+import { UserContext, CheckUser } from "../../context/UserContext";
+
 
 export default function CreatePost(){
+    const {user} = useContext(UserContext);
+    CheckUser();
 
-    const [link, setLink] = useState();
-    const [description, setDescription] = useState();
+    const url = process.env.REACT_APP_API_URL;
+
+    const [link, setLink] = useState("");
+    const [description, setDescription] = useState("");
 
     
-    function handleForm(e){
+    async function handleForm(e){
         e.preventDefault();
-
-        const form = {
+        const body = {
             link,
             description
         };
+        try{
 
+        }catch(err){
+            alert('There was an error publishing your link');
+        }
 
     }
 
@@ -34,6 +44,7 @@ export default function CreatePost(){
                     onChange={(e) => setDescription(e.target.value)} 
                     value={description}
                 />
+                <button type="submit"/>
             </form>
         </div>
     )
