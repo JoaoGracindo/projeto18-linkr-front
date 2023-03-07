@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
 
-import AuthContext from '../context/AuthContext';
+import UserContext from '../context/UserContext';
 
 function App() {
   return (
-    <AuthContext.Provider>
+    <UserContext.Provider>
       <BrowserRouter>
           <Routes>
           </Routes>
       </BrowserRouter>
-    </AuthContext.Provider>
+    </UserContext.Provider>
   );
 }
 
