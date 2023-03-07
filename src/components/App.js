@@ -4,7 +4,7 @@ import AuthContext from '../context/AuthContext';
 
 function App() {
   return (
-    <AuthContext.Provider value={{token, setToken}}>
+    <AuthContext.Provider>
       <BrowserRouter>
           <Routes>
           </Routes>
