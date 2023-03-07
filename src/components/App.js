@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
-import UserProvider from '../context/UserContext';
+import TokenProvider from '../context/UserContext';
 
 
 function App() {
   return (
-    <UserProvider>
+    <TokenProvider>
       <BrowserRouter>
           <Routes>
           </Routes>
       </BrowserRouter>
-    </UserProvider>
+    </TokenProvider>
   );
 }
 
