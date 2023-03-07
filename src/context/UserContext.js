@@ -2,22 +2,22 @@ import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-export const UserContext = createContext();
+export const TokenContext = createContext();
 
-export const CheckUser = () => {
+export const CheckToken = () => {
     const navigate = useNavigate()
-    if (JSON.parse(localStorage.getItem("user")) === null) {
+    if (JSON.parse(localStorage.getItem("token")) === null) {
         navigate("/")
     } 
 }
 
-export default function UserProvider({ children }) {
-    const lsUser = JSON.parse(localStorage.getItem("user"))
-    const [user, setUser] = useState(lsUser !== null ? lsUser : null)
+export default function TokenProvider({ children }) {
+    const lsToken = JSON.parse(localStorage.getItem("token"))
+    const [token, setToken] = useState(lsToken !== null ? lsToken : null)
 
     return (
-        <UserContext.Provider value={{ user, setUser }}>
+        <TokenContext.Provider value={{ token, setToken }}>
             {children}
-        </UserContext.Provider>
+        </TokenContext.Provider>
     )
 }
