@@ -1,10 +1,11 @@
+import { useState } from 'react';
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
 
 import AuthContext from '../context/AuthContext';
 
 function App() {
   return (
-    <AuthContext.Provider value={{token, setToken}}>
+    <AuthContext.Provider>
       <BrowserRouter>
           <Routes>
           </Routes>
