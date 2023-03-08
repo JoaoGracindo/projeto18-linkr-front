@@ -15,6 +15,11 @@ export default function Feed(){
     }, []);
     const {token} = useContext(TokenContext);
     const url = process.env.REACT_APP_API_URL;
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }
 
     const [link, setLink] = useState("");
     const [description, setDescription] = useState("");
@@ -23,18 +28,13 @@ export default function Feed(){
     async function handleForm(e){
         e.preventDefault();
         if(link.length < 3) return alert("Deve haver um link!");
-
-        const config = {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            },
-            body: {
-                link,
-                description
-            }
+        const body = {
+            link,
+            description
         };
+
         try{
-            await axios.post(`${url}post-link`, config);
+            await axios.post(`${url}post-link`, body, config);
 
         }catch(err){
             alert('There was an error publishing your link');
