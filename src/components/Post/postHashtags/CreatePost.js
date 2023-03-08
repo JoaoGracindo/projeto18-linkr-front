@@ -1,14 +1,19 @@
 import { useContext, useEffect, useState } from "react";
+import axios from 'axios';
+import styled from 'styled-components';
 import dotenv from 'dotenv';
 dotenv.config();
 
-import { UserContext, CheckUser } from "../../../context/UserContext";
+import { TokenContext, CheckToken } from "../../../context/UserContext";
 
 
-export default function CreatePost(){
-    const {user} = useContext(UserContext);
-    CheckUser();
+export default function Feed(){
 
+    useEffect(() => {
+        CheckToken();
+
+    }, []);
+    const {token} = useContext(TokenContext);
     const url = process.env.REACT_APP_API_URL;
 
     const [link, setLink] = useState("");
@@ -17,21 +22,30 @@ export default function CreatePost(){
     
     async function handleForm(e){
         e.preventDefault();
-        const body = {
-            link,
-            description
+        if(link.length < 3) return alert("Deve haver um link!");
+
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
+            body: {
+                link,
+                description
+            }
         };
         try{
+            await axios.post(`${url}post-link`, config);
 
         }catch(err){
             alert('There was an error publishing your link');
         }
-
+        setLink("");
+        setDescription("");
     }
 
     return (
         <div>
-            <img/>
+            <img />
             <form onSubmit={handleForm}>
                 <p>What are you going to share today?</p>
                 <input 
@@ -49,3 +63,15 @@ export default function CreatePost(){
         </div>
     )
 }
+
+const StyledPost = styled.div`
+    img{
+
+    }
+    form{
+
+    }
+    button{
+
+    }
+`
