@@ -47,7 +47,7 @@ table {
 
 body{
     
-    background-color: #D6D6D7;
+    background-color: #333333;
 
 
 }
