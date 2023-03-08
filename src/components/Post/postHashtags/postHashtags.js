@@ -11,7 +11,10 @@ export default function PostHashtags({children}){
     return(
         <ReactTagify
             tagStyle={tagStyle}
-            tagClicked={(tag) => navigate(`/hashtags/${tag}`)}>
+            tagClicked={(tag) => {
+                tag = tag.substring(1)
+                navigate(`/hashtags/${tag}`)
+            }}>
             {children}
         </ReactTagify>
     )
