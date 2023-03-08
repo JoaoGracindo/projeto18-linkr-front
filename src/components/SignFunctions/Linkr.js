@@ -50,6 +50,31 @@ const LinkrSpace = styled.div`
 
     }
 
+    @media(max-width: 1121px){
+
+        display: flex;
+        justify-content: center;
+        height: 175px;
+
+        div{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 0px;
+            width: 237px;
+            
+
+            h1{
+                font-size: 72px;
+                line-height: 84px;
+            }
+            h2{
+                font-size: 23px;
+                line-height: 34px;
+            }
+        }
+    }
+
 
 
 `
