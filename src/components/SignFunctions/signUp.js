@@ -1,19 +1,25 @@
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 export default function SignUp(){
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [username, setUsername] = useState("")
-    const [picture, setPicture] = useState("")
+    const [pic_url, setPic_url] = useState("")
     const navigate = useNavigate()
 
 
     function signUp(){
 
-        if(!email || !password || !username || !picture) {return alert("Preencha todos os campos")}
+        if(!email || !password || !username || !pic_url) {
+            return alert("Preencha todos os campos")
+        }
+        const promise = axios.post(`${process.env.REACT_APP_API_URL}/signup`, {username,email,password,pic_url})
+        promise.then(navigate("/"))
+        promise.catch((error) => alert(error.message))
 
 
 
@@ -46,11 +52,11 @@ export default function SignUp(){
                 onChange={e => setUsername(e.target.value)}/>
 
                 <input 
-                placeholder="picture url"
+                placeholder="pic_url url"
                 type="text"
                 required
-                value={picture}
-                onChange={e => setPicture(e.target.value)}/>
+                value={pic_url}
+                onChange={e => setPic_url(e.target.value)}/>
 
                 <button type="submit">Sign Up</button>
             </Form>
