@@ -11,6 +11,12 @@ export default function SignIn(){
 
     function signIn(){
 
+        if(!email || !password){
+            return alert("preencha todos os campos.")
+        }
+
+        
+
     }
 
 
