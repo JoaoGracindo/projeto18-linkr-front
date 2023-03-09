@@ -23,7 +23,7 @@ export default function SignUp(){
 
         setLoading(true)
         
-        axios.post(`${process.env.REACT_APP_API_URL}/signup`, {username,email,password,pic_url})
+        axios.post(`${process.env.REACT_APP_API_URL}/sign-up`, {username,email,password,pic_url})
         .then( () => {
             alert("Usuário cadastrado com sucesso.")
             navigate("/")
