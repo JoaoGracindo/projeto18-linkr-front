@@ -20,7 +20,7 @@ export default function SignIn(){
             return alert("preencha todos os campos.")
         }
 
-        axios.post(`${process.env.REACT_APP_API_URL}/signin`, {email,password})
+        axios.post(`${process.env.REACT_APP_API_URL}/sign-in`, {email,password})
         .then((response) => {
             setToken(response.data)
             navigate("/timeline")
