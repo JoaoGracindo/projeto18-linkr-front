@@ -13,4 +13,8 @@ export default function SignUpPage(){
 
 const Screen = styled.div`
     display: flex;
+
+    @media(max-width: 1121px){
+        flex-direction: column;
+    }
 `

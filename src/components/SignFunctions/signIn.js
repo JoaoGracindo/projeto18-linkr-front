@@ -1,15 +1,36 @@
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext} from "react";
+import { TokenContext } from "../../context/UserContext";
+import axios from "axios";
 
 export default function SignIn(){
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
+    const { setToken } = useContext(TokenContext)
 
 
-    function signIn(){
+    function signIn(event){
+
+        event.preventDefault()
+
+        if(!email || !password){
+            return alert("preencha todos os campos.")
+        }
+
+        axios.post(`${process.env.REACT_APP_API_URL}/sign-in`, {email,password})
+        .then((response) => {
+            setToken(response.data)
+            navigate("/timeline")
+        })
+        .catch((error) => {
+            alert(`STATUS ${error.response.status} ${error.response.data}`)
+        })
+
+
+        
 
     }
 
@@ -27,14 +48,14 @@ export default function SignIn(){
 
                 <input 
                 placeholder="password"
-                type="text"
+                type="password"
                 required
                 value={password}
                 onChange={e => setPassword(e.target.value)}/>
 
                 <button type="submit">Sign In</button>
             </Form>
-            <Link to="/signup">Switch back to log in</Link>
+            <Link to="/sign-up">Switch back to log in</Link>
 
         </SignUpSpace>
     )
@@ -66,6 +87,9 @@ const SignUpSpace = styled.div`
     }
     
 
+    @media(max-width: 1121px){
+        width: 100%;
+    }
    
 `
 
@@ -87,6 +111,10 @@ const Form = styled.form`
             font-weight: 700;
             font-size: 27px;
             line-height: 40px;
+
+            &:disabled{
+                background-color: #fafafa;
+            }
         }
 
         button{
@@ -100,5 +128,15 @@ const Form = styled.form`
             font-weight: 700;
             font-size: 27px;
             line-height: 40px;
+
+            &:disabled{
+                background-color: #224471;
+            }
         }
+
+        @media(max-width: 1121px){
+        input,button{
+            width: 330px;
+        }
+    }
 `
