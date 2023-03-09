@@ -12,7 +12,7 @@ function App() {
       <GlobalStyled/>
           <Routes>
             <Route path="/" element={<SignInPage/>}/>
-            <Route path="/signup" element={<SignUpPage/>}/>
+            <Route path="/sign-up" element={<SignUpPage/>}/>
           </Routes>
       </BrowserRouter>
     </TokenProvider>
