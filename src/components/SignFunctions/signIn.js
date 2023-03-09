@@ -11,6 +11,12 @@ export default function SignIn(){
 
     function signIn(){
 
+        if(!email || !password){
+            return alert("preencha todos os campos.")
+        }
+
+        
+
     }
 
 
@@ -66,6 +72,9 @@ const SignUpSpace = styled.div`
     }
     
 
+    @media(max-width: 1121px){
+        width: 100%;
+    }
    
 `
 
@@ -101,4 +110,10 @@ const Form = styled.form`
             font-size: 27px;
             line-height: 40px;
         }
+
+        @media(max-width: 1121px){
+        input,button{
+            width: 330px;
+        }
+    }
 `

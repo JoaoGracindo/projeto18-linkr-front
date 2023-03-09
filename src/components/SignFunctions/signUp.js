@@ -17,10 +17,10 @@ export default function SignUp(){
         if(!email || !password || !username || !pic_url) {
             return alert("Preencha todos os campos")
         }
-        const promise = axios.post(`${process.env.REACT_APP_API_URL}/signup`, {username,email,password,pic_url})
-        promise.then(navigate("/"))
-        promise.catch((error) => alert(error.message))
-
+        
+        axios.post(`${process.env.REACT_APP_API_URL}/signup`, {username,email,password,pic_url})
+        .then(navigate("/"))
+        .catch((error) => alert(error.response.data))
 
 
     }
@@ -52,7 +52,7 @@ export default function SignUp(){
                 onChange={e => setUsername(e.target.value)}/>
 
                 <input 
-                placeholder="pic_url url"
+                placeholder="picture url"
                 type="text"
                 required
                 value={pic_url}
@@ -91,6 +91,9 @@ const SignUpSpace = styled.div`
         margin-top: 8px;
     }
     
+    @media(max-width: 1121px){
+        width: 100%;
+    }
 
    
 `
@@ -126,5 +129,11 @@ const Form = styled.form`
             font-weight: 700;
             font-size: 27px;
             line-height: 40px;
+        }
+
+        @media(max-width: 1121px){
+            input,button{
+                width: 330px;
+            }
         }
 `
