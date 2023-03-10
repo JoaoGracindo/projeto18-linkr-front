@@ -53,4 +53,10 @@ export const HeaderContainer = styled.div`
 
     margin: 0 10px 10px 0;
   }
+
+  @media(max-width: 600px) {
+    input {
+      display: none;
+    }
+  }
 `;

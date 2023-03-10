@@ -1,5 +1,6 @@
 import Header from "../../components/Header/index.jsx";
 import PostBox from "../../components/PostBox/index.jsx";
+import TrendingTags from "../../components/Tags/Trending/trendingTable.js";
 import { BlackBody } from "../../styles/BlackBodyGlobalStyle";
 import { FeedContainer } from "../../styles/FeedContainer.js";
 import { TitleContainer } from "../../styles/TitleContainer.js";
@@ -12,6 +13,7 @@ export default function UserPage() {
       <Header />
 
       <UserPageContainer>
+        <input type="text" placeholder="Pesquise um usuário" />
         <TitleContainer>
           <img
             src="https://e7.pngegg.com/pngimages/708/344/png-clipart-dogs-dogs.png"
@@ -21,10 +23,10 @@ export default function UserPage() {
         </TitleContainer>
         <FeedContainer>
           <div>
-            <PostBox></PostBox>
-            <PostBox></PostBox>
+            <PostBox />
+            <PostBox />
           </div>
-          {/* <TrendingBox></TrendingBox> */}
+          <TrendingTags />
         </FeedContainer>
       </UserPageContainer>
     </>
