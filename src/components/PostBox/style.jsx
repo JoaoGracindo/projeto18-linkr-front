@@ -12,6 +12,10 @@ export const PostBoxContainer = styled.div`
 
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 600px) {
+    width: 100vw;
+  }
 `;
 
 export const PostInfoContainer = styled.div`
@@ -31,24 +35,6 @@ export const PostInfoContainer = styled.div`
     margin-inline: 20px;
 
     object-fit: cover;
-  }
-
-  svg {
-    font-size: 25px;
-
-    color: white;
-
-    margin-top: 15px;
-
-    cursor: pointer;
-  }
-
-  p {
-    font-size: 11px;
-
-    color: white;
-
-    margin-top: 5px;
   }
 `;
 
