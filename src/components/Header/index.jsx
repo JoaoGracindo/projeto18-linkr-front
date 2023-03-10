@@ -2,7 +2,7 @@ import { HeaderContainer, Options } from "../../components/Header/style";
 import { useContext, useState } from "react";
 import logo from "../../images/linkr-logo.png";
 import { AiOutlineDown } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { TokenContext } from "../../context/UserContext";
 
@@ -39,17 +39,18 @@ export default function Header() {
   return (
     <HeaderContainer>
       <img src={logo} alt="logo" />
-      <input type="text" placeholder={token} />
-      <div>
-        <AiOutlineDown onClick={click} clicked={clicked}/>
-        <Options clicked={clicked}>
-          <p to={"/"} onClick={logout}>Logout</p>
-        </Options>
+      <input type="text" placeholder="Search for people" />
+      <div onClick={click}>
+        <AiOutlineDown clicked={clicked}/>
+        
         <img
           src="https://e7.pngegg.com/pngimages/708/344/png-clipart-dogs-dogs.png"
           alt="user"
         />
       </div>
+      <Options clicked={clicked}>
+          <p onClick={logout}>Logout</p>
+      </Options>
     </HeaderContainer>
   );
 }
