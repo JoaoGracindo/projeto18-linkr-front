@@ -50,7 +50,6 @@ body{
     background-color: #333333;
 }
 
-
 * {
 	box-sizing: border-box;
 
