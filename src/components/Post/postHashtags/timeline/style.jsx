@@ -11,7 +11,7 @@ export const PostBoxContainer = styled.div`
   padding: 15px 15px 15px 0;
 
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 
   @media (max-width: 600px) {
     width: 100vw;
@@ -38,10 +38,29 @@ export const PostInfoContainer = styled.div`
   }
 `;
 
-export const PostContentContainer = styled.div`
-  width: 500px;
-  height: 100%;
+export const UserInfoContainer = styled.div`
   
+  
+`
+
+export const PostContentContainer = styled.div`
+  min-width: 500px;
+  height: 100%;
+
+  .metadata{
+    display: flex;
+    margin-left: 20px;
+
+    p{
+      overflow-wrap: anywhere;
+    }
+
+    img{
+      width: 153.44px;
+      height: 155px;
+      margin-left: 20px;
+    }
+  }
 
   h3 {
     font-family: "Lato", sans-serif;

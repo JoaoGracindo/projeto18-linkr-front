@@ -1,9 +1,8 @@
-import { useState } from 'react';
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import TokenProvider from '../context/UserContext';
 import UserPage from '../pages/UserPage';
 import GlobalStyled from './GlobalStyled';
-import Timeline from './Post/postHashtags/Timeline';
+import Timeline from './Post/postHashtags/timeline/Timeline';
 import SignInPage from './SignFunctions/signInPage';
 import SignUpPage from './SignFunctions/signUpPage';
 
