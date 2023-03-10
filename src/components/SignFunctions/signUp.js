@@ -9,18 +9,30 @@ export default function SignUp(){
     const [password, setPassword] = useState("")
     const [username, setUsername] = useState("")
     const [pic_url, setPic_url] = useState("")
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
 
-    function signUp(){
+    function signUp(event){
+
+        event.preventDefault()
 
         if(!email || !password || !username || !pic_url) {
             return alert("Preencha todos os campos")
         }
-        const promise = axios.post(`${process.env.REACT_APP_API_URL}/signup`, {username,email,password,pic_url})
-        promise.then(navigate("/"))
-        promise.catch((error) => alert(error.message))
 
+        setLoading(true)
+        
+        axios.post(`${process.env.REACT_APP_API_URL}/sign-up`, {username,email,password,pic_url})
+        .then( () => {
+            alert("Usuário cadastrado com sucesso.")
+            navigate("/")
+        })
+        .catch((error) => {
+            alert(error.response.data)
+            setLoading(false)
+        })
+        
 
 
     }
@@ -34,13 +46,15 @@ export default function SignUp(){
                 placeholder="e-mail"
                 type="text"
                 required
+                disabled={loading}
                 value={email}
                 onChange={e => setEmail(e.target.value)}/>
 
                 <input 
                 placeholder="password"
-                type="text"
+                type="password"
                 required
+                disabled={loading}
                 value={password}
                 onChange={e => setPassword(e.target.value)}/>
                 
@@ -48,17 +62,19 @@ export default function SignUp(){
                 placeholder="username"
                 type="text"
                 required
+                disabled={loading}
                 value={username}
                 onChange={e => setUsername(e.target.value)}/>
 
                 <input 
-                placeholder="pic_url url"
+                placeholder="picture url"
                 type="text"
                 required
+                disabled={loading}
                 value={pic_url}
                 onChange={e => setPic_url(e.target.value)}/>
 
-                <button type="submit">Sign Up</button>
+                <button type="submit" disabled={loading}>Sign Up</button>
             </Form>
             <Link to="/">Switch back to log in</Link>
 
@@ -91,6 +107,9 @@ const SignUpSpace = styled.div`
         margin-top: 8px;
     }
     
+    @media(max-width: 1121px){
+        width: 100%;
+    }
 
    
 `
@@ -113,6 +132,10 @@ const Form = styled.form`
             font-weight: 700;
             font-size: 27px;
             line-height: 40px;
+
+            &:disabled{
+                background-color: #fafafa;
+            }
         }
 
         button{
@@ -126,5 +149,15 @@ const Form = styled.form`
             font-weight: 700;
             font-size: 27px;
             line-height: 40px;
+            &:disabled{
+                background-color: #224471;
+            }
+        }
+        
+
+        @media(max-width: 1121px){
+            input,button{
+                width: 330px;
+            }
         }
 `
