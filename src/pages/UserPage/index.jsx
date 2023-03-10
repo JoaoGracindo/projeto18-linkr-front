@@ -5,8 +5,22 @@ import { BlackBody } from "../../styles/BlackBodyGlobalStyle";
 import { FeedContainer } from "../../styles/FeedContainer.js";
 import { TitleContainer } from "../../styles/TitleContainer.js";
 import { UserPageContainer } from "./style.jsx";
+import { CheckToken } from "../../context/UserContext.js";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function UserPage() {
+
+  const navigate = useNavigate()
+
+  console.log(localStorage.token)
+
+    useEffect(() => {
+      if ((localStorage.token) == undefined) {
+        navigate("/")
+    } 
+    },[])
+  
   return (
     <>
       <BlackBody />
@@ -23,6 +37,11 @@ export default function UserPage() {
         </TitleContainer>
         <FeedContainer>
           <div>
+            <PostBox />
+            <PostBox />
+            <PostBox />
+            <PostBox />
+            <PostBox />
             <PostBox />
             <PostBox />
           </div>
