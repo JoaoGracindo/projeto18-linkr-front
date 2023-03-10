@@ -24,7 +24,7 @@ export default function SignIn(){
         .then((response) => {
             setToken(response.data)
             localStorage.setItem("token",JSON.stringify(response.data))
-            navigate("/user")
+            navigate("/timeline")
         })
         .catch((error) => {
             alert(`STATUS ${error.response.status} ${error.response.data}`)
