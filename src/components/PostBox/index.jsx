@@ -3,7 +3,7 @@ import {
   PostContentContainer,
   PostInfoContainer,
 } from "./style";
-import { AiOutlineHeart } from "react-icons/ai";
+import LikeButton from "../Post/LikeButton";
 
 export default function PostBox({pic_url, num_likes, description, name}) {
   return (
@@ -13,8 +13,7 @@ export default function PostBox({pic_url, num_likes, description, name}) {
           src={pic_url}
           alt={name}
         />
-        <AiOutlineHeart />
-        <p>{num_likes} likes</p>
+        <LikeButton />
       </PostInfoContainer>
       <PostContentContainer>
         <h3>{name}</h3>

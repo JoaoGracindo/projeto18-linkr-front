@@ -1,7 +1,6 @@
 
 import PostBox from "../../PostBox";
-import { TokenContext } from "../../../context/UserContext";
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import axios from 'axios';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
@@ -12,20 +11,20 @@ export default function Timeline(){
     const [timeline, setTimeline] = useState([]);
     const [link, setLink] = useState("");
     const [description, setDescription] = useState("");
-    const {token} = useContext(TokenContext) ?? localStorage.token;
-    const navigate = useNavigate();
-    const url = process.env.REACT_APP_API_URL;
+    const token = JSON.parse(localStorage.token);
     const config = {
         headers: {
             "Authorization": `Bearer ${token}`
         }
-    }
+    };
+    const navigate = useNavigate();
+    const url = process.env.REACT_APP_API_URL;
+
 
     useEffect(() => {
-        if (localStorage.token === null) {
-            navigate("/")
+        if (!token) {
+            navigate("/");
         } 
-
         axios.get(`${url}/timeline`, config).then((response) => {
             setTimeline([...response.data]);
 
