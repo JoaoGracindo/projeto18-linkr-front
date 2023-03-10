@@ -1,5 +1,6 @@
 
-import PostBox from "../../PostBox";
+import PostBox from "./index";
+import Header from "../../../Header/index";
 import {  useEffect, useState } from "react";
 import axios from 'axios';
 import styled from 'styled-components';
@@ -25,9 +26,12 @@ export default function Timeline(){
         if (!token) {
             navigate("/");
         } 
-        axios.get(`${url}/timeline`, config).then((response) => {
+        axios.get(`${url}/timeline`, config).
+        then((response) => {
             setTimeline([...response.data]);
-
+        })
+        .catch((err) => {
+            alert("An error occured while trying to fetch the posts, please refresh the page");
         })
     }, []);
     
@@ -53,6 +57,8 @@ export default function Timeline(){
     
 
     return (
+        <>
+        <Header/>
         <div>
             <img />
             <form onSubmit={handleForm}>
@@ -71,9 +77,12 @@ export default function Timeline(){
                 <button type="submit"/>
             </form>
             <StyledFeed>
-                {timeline.map((object) => <PostBox {...object}/>)}
+                {
+                    timeline.length === 0 ? <p>There are no posts yet</p> : timeline.map((object) => <PostBox {...object}/>)
+                }
             </StyledFeed>
         </div>
+        </>
     )
 }
 
