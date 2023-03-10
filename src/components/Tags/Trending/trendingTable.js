@@ -7,12 +7,12 @@ import TagName from "./TagName";
 export default function TrendingTags() {
     const [tags, setTags] = useState([])
     useEffect(() => getTrendingList(), [])
-    console.log(tags)
+    //console.log(tags)
     function getTrendingList(){
         apiHashtags.getTrending()
         .then(res => {
             setTags(res.data)
-            console.log(res.data)
+            //console.log(res.data)
         })
         .catch(err => {
             console.log(err)

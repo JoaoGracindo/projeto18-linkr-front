@@ -29,7 +29,7 @@ export default function SignUp(){
             navigate("/")
         })
         .catch((error) => {
-            alert(error.response.data)
+            console.log(error)
             setLoading(false)
         })
         

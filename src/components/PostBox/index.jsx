@@ -4,15 +4,21 @@ import {
   PostInfoContainer,
 } from "./style";
 import LikeButton from "../Post/LikeButton";
+import { Link } from "react-router-dom";
 
-export default function PostBox({pic_url, num_likes, description, name}) {
+export default function PostBox({
+  pic_url,
+  num_likes,
+  description,
+  name,
+  owner,
+}) {
   return (
     <PostBoxContainer>
       <PostInfoContainer>
-        <img
-          src={pic_url}
-          alt={name}
-        />
+        <Link to={`/user/${owner}`}>
+          <img src={pic_url} alt={name} />
+        </Link>
         <LikeButton />
       </PostInfoContainer>
       <PostContentContainer>
@@ -22,4 +28,3 @@ export default function PostBox({pic_url, num_likes, description, name}) {
     </PostBoxContainer>
   );
 }
-
