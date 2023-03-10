@@ -23,7 +23,8 @@ export default function SignIn(){
         axios.post(`${process.env.REACT_APP_API_URL}/sign-in`, {email,password})
         .then((response) => {
             setToken(response.data)
-            navigate("/timeline")
+            localStorage.setItem("token",JSON.stringify(response.data))
+            navigate("/user")
         })
         .catch((error) => {
             alert(`STATUS ${error.response.status} ${error.response.data}`)
