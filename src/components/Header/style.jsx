@@ -57,11 +57,9 @@ export const HeaderContainer = styled.div`
 
     margin: 0 10px 10px 0;
 
-    /* transform: rotate(180deg); */
+    transition: all linear .2s;
 
-    transform: ${props => props.clicked? "rotate(180deg)":""};
-
-    transition: all linear .5s;
+    transform: ${props => props.clicked ? "rotate(180deg)" : ""};
   }
 
   @media(max-width: 600px) {
@@ -88,7 +86,7 @@ export const Options = styled.div`
     line-height: 20px;
     letter-spacing: 0.05em;
     
-    transition: all linear .5s;
+    transition: all linear .2s;
     z-index: -1;
     
     p{
