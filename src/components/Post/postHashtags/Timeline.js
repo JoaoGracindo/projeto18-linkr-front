@@ -1,21 +1,19 @@
+
+import PostBox from "../../PostBox";
+import { TokenContext } from "../../../context/UserContext";
 import { useContext, useEffect, useState } from "react";
 import axios from 'axios';
 import styled from 'styled-components';
-import dotenv from 'dotenv';
-dotenv.config();
-
-import { TokenContext, CheckToken } from "../../../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 
-export default function Feed(){
+export default function Timeline(){
 
-    useEffect(() => {
-        CheckToken();
-
-    }, []);
-
-
-    const {token} = useContext(TokenContext);
+    const [timeline, setTimeline] = useState([]);
+    const [link, setLink] = useState("");
+    const [description, setDescription] = useState("");
+    const {token} = useContext(TokenContext) ?? localStorage.token;
+    const navigate = useNavigate();
     const url = process.env.REACT_APP_API_URL;
     const config = {
         headers: {
@@ -23,20 +21,27 @@ export default function Feed(){
         }
     }
 
-    const [link, setLink] = useState("");
-    const [description, setDescription] = useState("");
+    useEffect(() => {
+        if (localStorage.token === null) {
+            navigate("/")
+        } 
 
+        axios.get(`${url}/timeline`, config).then((response) => {
+            setTimeline([...response.data]);
+
+        })
+    }, []);
     
     async function handleForm(e){
         e.preventDefault();
-        if(link.length < 3) return alert("Deve haver um link!");
+        if(link.length < 3) return alert("Deve haver um link! valido");
         const body = {
             link,
             description
         };
 
         try{
-            await axios.post(`${url}post-link`, body, config);
+            await axios.post(`${url}/post-link`, body, config);
 
         }catch(err){
             alert('There was an error publishing your link');
@@ -44,6 +49,9 @@ export default function Feed(){
         setLink("");
         setDescription("");
     }
+
+    if(!timeline) return <>Loading...</>
+    
 
     return (
         <div>
@@ -54,6 +62,7 @@ export default function Feed(){
                     placeholder="https://..." 
                     onChange={(e) => setLink(e.target.value)} 
                     value={link}
+                    type="url"
                 />
                 <input 
                     placeholder="Awesome article about #javascript"
@@ -62,6 +71,9 @@ export default function Feed(){
                 />
                 <button type="submit"/>
             </form>
+            <StyledFeed>
+                {timeline.map((object) => <PostBox {...object}/>)}
+            </StyledFeed>
         </div>
     )
 }
@@ -76,4 +88,8 @@ const StyledPost = styled.div`
     button{
 
     }
+`
+
+const StyledFeed = styled.div`
+
 `

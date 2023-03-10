@@ -5,21 +5,22 @@ import {
 } from "./style";
 import { AiOutlineHeart } from "react-icons/ai";
 
-export default function PostBox() {
+export default function PostBox({pic_url, num_likes, description, name}) {
   return (
     <PostBoxContainer>
       <PostInfoContainer>
         <img
-          src="https://e7.pngegg.com/pngimages/708/344/png-clipart-dogs-dogs.png"
-          alt="user"
+          src={pic_url}
+          alt={name}
         />
         <AiOutlineHeart />
-        <p>15 likes</p>
+        <p>{num_likes} likes</p>
       </PostInfoContainer>
       <PostContentContainer>
-        <h3>Juvenal Juvêncio</h3>
-        <p>Muito maneiro esse tutorial de Material UI com React, deem uma olhada! #react #material</p>
+        <h3>{name}</h3>
+        <p>{description}</p>
       </PostContentContainer>
     </PostBoxContainer>
   );
 }
+
