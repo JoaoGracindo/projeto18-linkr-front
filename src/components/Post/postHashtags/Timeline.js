@@ -47,22 +47,29 @@ export default function Timeline() {
 
   return (
     <div>
-      <img />
-      <form onSubmit={handleForm}>
-        <p>What are you going to share today?</p>
-        <input
-          placeholder="https://..."
-          onChange={(e) => setLink(e.target.value)}
-          value={link}
-          type="url"
-        />
-        <input
-          placeholder="Awesome article about #javascript"
-          onChange={(e) => setDescription(e.target.value)}
-          value={description}
-        />
-        <button type="submit" />
-      </form>
+      <StyledPost>
+
+        <div>
+          <img src="https://ovicio.com.br/wp-content/uploads/2023/03/20230319-tom-taylor-mostra-um-terrivel-ra-277x277.jpg" alt="vilao" />
+          <p>What are you going to share today?</p>
+        </div>
+        <form onSubmit={handleForm}>
+          
+          <input
+            placeholder="https://..."
+            onChange={(e) => setLink(e.target.value)}
+            value={link}
+            type="url"
+          />
+          <input
+            className="description"
+            placeholder="Awesome article about #javascript"
+            onChange={(e) => setDescription(e.target.value)}
+            value={description}
+          />
+          <button type="submit">Publish</button>
+        </form>
+      </StyledPost>
       <StyledFeed>
         {timeline.map((object) => (
           <PostBox key={object.id} {...object} />
@@ -73,12 +80,91 @@ export default function Timeline() {
 }
 
 const StyledPost = styled.div`
-  img {
+
+  width: 611px;
+  height: 209px;
+  padding: 21px 86px;
+  border-radius: 16px;
+  box-sizing: border-box;
+  background-color: white;
+  position: relative;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+
+  img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    object-fit: cover;
+    position: absolute;
+    top: 16px;
+    left: 18px;
   }
-  form {
-  }
-  button {
-  }
+
+  p{
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 24px;
+    color: #707070;
+  }  
+
+ 
+
+    input{
+      width: 503px;
+      height: 30px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 5px;
+      background: #EFEFEF;
+      text-justify: initial;
+      
+
+      padding: 5px 12px;
+      box-sizing: border-box;
+      
+
+      &::placeholder{
+        position: absolute;
+        top: 5px;
+        left: 12px;
+        max-width: 20px;
+        font-family: 'Lato';
+        font-weight: 300;
+        font-size: 15px;
+        line-height: 18px;
+        color: #949494;
+
+      }
+    }
+
+    .description{
+      min-height: 66px;
+    }
+
+    button{
+      width: 112px;
+      height: 31px;
+      border: none;
+      border-radius: 5px;
+      background: #1877F2;
+
+      position: absolute;
+      bottom: 16px;
+      right: 22px;
+      font-family: 'Lato';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 14px;
+
+      color: #FFFFFF;
+      
+    }
+
+  
+ 
 `;
 
 const StyledFeed = styled.div``;
