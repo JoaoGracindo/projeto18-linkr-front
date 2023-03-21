@@ -64,18 +64,7 @@ export default function Timeline(){
         setLink("");
         setDescription("");
     }
-    axios.get(`${url}/timeline`, config).then((response) => {
-      setTimeline([...response.data]);
-    });
-  }, []);
 
-  async function handleForm(e) {
-    e.preventDefault();
-    if (link.length < 3) return alert("Deve haver um link! valido");
-    const body = {
-      link,
-      description,
-    };
 
     return (
         <>
@@ -116,4 +105,6 @@ const StyledPost = styled.div`
   }
 `;
 
-const StyledFeed = styled.div``;
+const StyledFeed = styled.div`
+
+`;
