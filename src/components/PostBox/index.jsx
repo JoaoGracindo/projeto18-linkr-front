@@ -22,8 +22,8 @@ export default function PostBox({
         <LikeButton />
       </PostInfoContainer>
       <PostContentContainer>
-        <h3>{name}</h3>
-        <p>{description}</p>
+        <h3>Juvenal Juvêncio</h3>
+        <p>Muito maneiro esse tutorial de Material UI com React, deem uma olhada! #react #material</p>
       </PostContentContainer>
     </PostBoxContainer>
   );
