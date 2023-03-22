@@ -55,7 +55,8 @@ export default function Timeline() {
 	if (!timeline) return <>Loading</>;
 
 	return (
-		<div>
+		<Conteiner>
+            <Header/>
 			<StyledPost>
 				<div>
 					<img
@@ -88,9 +89,17 @@ export default function Timeline() {
 					/>
 				))}
 			</StyledFeed>
-		</div>
+		</Conteiner>
 	);
 }
+
+const Conteiner = styled.div`
+    margin-top: 100px;
+    margin-bottom: 30px;
+    display: flex;
+	flex-direction: column;
+	align-items: center;
+`
 
 const StyledFeed = styled.div`
 	display: flex;
