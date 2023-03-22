@@ -163,6 +163,41 @@ const StyledPost = styled.div`
       
     }
 
+    @media(max-width: 700px){
+      width: 100%;
+      height: 164px;
+      padding: 0px;
+      border-radius: 0px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      img{
+        display: none;
+      }
+
+      form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 345px;
+        position: relative;
+        
+      }
+
+      input{
+        width: 344px;
+      }
+      .description{
+        min-height: 47px;
+      }
+      button{
+        bottom: -30px;
+        right: 0px;
+        height: 22px;
+      }
+    }
   
  
 `;
