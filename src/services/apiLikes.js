@@ -20,7 +20,7 @@ async function postLike(token, post_id) {
 
 async function deleteLike(token, post_id) {
    
-    const promise = await axios.delete(`${BASE_URL}/likes/${post_id}`, {}, createConfig(token))
+    const promise = await axios({ method: 'delete', url: `${BASE_URL}/likes/${post_id}`, headers: { 'Authorization': 'Bearer ' + token } })/* axios.delete(`${BASE_URL}/likes/${post_id}`, {}, createConfig(token)) */
     return promise
 
 }
