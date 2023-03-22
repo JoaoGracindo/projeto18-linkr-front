@@ -7,7 +7,7 @@ import { TitleContainer } from "../../styles/TitleContainer.js";
 import { UserPageContainer } from "./style.js";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import PostComponent from "../../components/Post/PostComponent/PostComponent.js";
+import PostComponent from "../../components/Post/postHashtags/timeline/PostModel.js";
 import apiHashtags from "../../services/apiHashtags.js";
 
 export default function HashtagPage() {
@@ -24,7 +24,7 @@ export default function HashtagPage() {
   }, []);
 
   async function getPosts(hashtag, token){
-    const promise = await apiHashtags.getHashtagPosts(hashtag, "4555e429-6508-4571-9054-008fa4ce2ad7")
+    const promise = await apiHashtags.getHashtagPosts(hashtag, token)
     setPosts(promise?.data)
     console.log(promise);
   }

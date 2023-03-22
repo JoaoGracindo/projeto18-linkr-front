@@ -46,7 +46,7 @@ async function deleteTag(description, post_id, config) {
 
 async function getHashtagPosts(hashtag, token){
     try {
-        const promise = axios({ method: 'get', url: `${BASE_URL}/hashtags/${hashtag}`, headers: { 'Authorization': 'Bearer ' + token } })/* await axios.get(`${BASE_URL}/hashtags/${hashtag}`, {}, config) */
+        const promise = await axios({ method: 'get', url: `${BASE_URL}/hashtags/${hashtag}`, headers: { 'Authorization': 'Bearer ' + token } })/* await axios.get(`${BASE_URL}/hashtags/${hashtag}`, {}, config) */
         return promise
     } catch (error) {
         console.log(error)

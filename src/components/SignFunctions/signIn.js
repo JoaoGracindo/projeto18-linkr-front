@@ -22,6 +22,7 @@ export default function SignIn(){
 
         axios.post(`${process.env.REACT_APP_API_URL}/sign-in`, {email,password})
         .then((response) => {
+            console.log(response.data.token)
             setToken(response.data.token)
             localStorage.setItem("token",JSON.stringify(response.data.token))
 

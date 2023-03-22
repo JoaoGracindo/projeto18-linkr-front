@@ -9,8 +9,8 @@ import apiLikes from "../../services/apiLikes";
 export default function LikeButton({ post_id, likersNames, likesCount, liked }) {
   const [localLiked, setLiked] = useState(liked);
   const [localLikesCount, setLikesCount] = useState(likesCount)
-  const { token } = useContext(TokenContext);
-
+  const token = JSON.parse(localStorage.token);
+  
   async function postLike( token, post_id ) {
     await apiLikes
       .postLike(token, post_id)
@@ -18,7 +18,7 @@ export default function LikeButton({ post_id, likersNames, likesCount, liked }) 
         setLiked(true);
       })
       .catch((err) => {
-        alert(err.response);
+        console.log(err.response);
       });
   }
 
@@ -29,7 +29,7 @@ export default function LikeButton({ post_id, likersNames, likesCount, liked }) 
         setLiked(false);
       })
       .catch((err) => {
-        alert(err.response);
+        console.log(err.response);
       });
   }
 
@@ -89,7 +89,7 @@ export default function LikeButton({ post_id, likersNames, likesCount, liked }) 
           data-tooltip-content={tooltipText}
           onClick={() => {
             setLiked(!localLiked)
-            setLikesCount(localLikesCount-1)
+            setLikesCount(localLikesCount+1)
             handleTooltipText()
             postLike( token, post_id );
           }}

@@ -6,6 +6,7 @@ import Modal from "react-modal";
 
 import LikeButton from "../../LikeButton";
 import { useState } from "react";
+import PostHashtags from "../postHashtags";
 
 Modal.setAppElement("#root");
 
@@ -87,7 +88,7 @@ export default function PostComponent({
 					</div>
 				</div>
 				<div className="contentContainer">
-					<div className="description">{description}</div>
+					<div className="description"><PostHashtags><p>{description}</p></PostHashtags></div>
 					<div
 						className="link"
 						onClick={() => window.open(url_metadata.url, "_blank")}>
