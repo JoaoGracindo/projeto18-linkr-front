@@ -41,6 +41,7 @@ export const PostInfoContainer = styled.div`
 export const PostContentContainer = styled.div`
   width: 500px;
   height: 100%;
+  
 
   h3 {
     font-family: "Lato", sans-serif;

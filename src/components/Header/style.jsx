@@ -6,7 +6,7 @@ export const HeaderContainer = styled.div`
   position: fixed;
   top: 0px;
   left: 0px;
-  z-index: 1;
+  z-index: 2;
 
   background-color: #151515;
 
