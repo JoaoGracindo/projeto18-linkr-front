@@ -43,6 +43,7 @@ export default function PostComponent({
 		axios
 			.delete(`${url}/link/${id}`, config)
 			.then((response) => {
+				closeModal();
 				console.log(response);
 			})
 			.catch((response) => {
@@ -85,11 +86,11 @@ export default function PostComponent({
 						<FiTrash2 onClick={openModal} />
 					</div>
 				</div>
-				<div
-					className="contentContainer"
-					onClick={() => window.open(url_metadata.url, "_blank")}>
+				<div className="contentContainer">
 					<div className="description">{description}</div>
-					<div className="link">
+					<div
+						className="link"
+						onClick={() => window.open(url_metadata.url, "_blank")}>
 						<div className="metadata-text">
 							<div className="metadata-title">{url_metadata.title}</div>
 							<div className="metadata-description">
@@ -156,9 +157,8 @@ const modalTitle = {
 	fontStyle: "normal",
 	fontWeight: "700",
 	fontSize: "34px",
-  color: "white",
-  marginBottom: "15px"
-
+	color: "white",
+	marginBottom: "15px",
 };
 const modalCancel = {
 	width: "134px",
@@ -169,8 +169,8 @@ const modalCancel = {
 	fontStyle: "normal",
 	fontWeight: "700",
 	fontSize: "18px",
-  border: "none",
-  margin: "0 7px",
+	border: "none",
+	margin: "0 7px",
 	color: "#1877F2",
 };
 const modalConfirm = {
@@ -182,8 +182,8 @@ const modalConfirm = {
 	fontStyle: "normal",
 	fontWeight: "700",
 	fontSize: "18px",
-  border: "none",
-  margin: "0 7px",
+	border: "none",
+	margin: "0 7px",
 	color: "#FFFFFF",
 };
 
