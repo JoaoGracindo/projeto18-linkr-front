@@ -1,23 +1,11 @@
 
-import PostBox from "./index";
+import PostBox from "./PostModel";
 import Header from "../../../Header/index";
 import {  useEffect, useState } from "react";
 import axios from 'axios';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 
-export default function Timeline() {
-  const [timeline, setTimeline] = useState([]);
-  const [link, setLink] = useState("");
-  const [description, setDescription] = useState("");
-  const token = JSON.parse(localStorage.token);
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  const navigate = useNavigate();
-  const url = process.env.REACT_APP_API_URL;
 
 export default function Timeline(){
 
@@ -25,6 +13,7 @@ export default function Timeline(){
     const [link, setLink] = useState("");
     const [description, setDescription] = useState("");
     const token = JSON.parse(localStorage.token);
+    
     const config = {
         headers: {
             "Authorization": `Bearer ${token}`
@@ -65,6 +54,7 @@ export default function Timeline(){
         setDescription("");
     }
 
+    if(!timeline)return <>Loading</>
 
     return (
         <>
@@ -96,15 +86,11 @@ export default function Timeline(){
     )
 }
 
-const StyledPost = styled.div`
-  img {
-  }
-  form {
-  }
-  button {
-  }
-`;
-
 const StyledFeed = styled.div`
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+    gap: 15px;
+    margin-top: 30px;
 
-`;
+`

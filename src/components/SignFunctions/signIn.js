@@ -9,7 +9,7 @@ export default function SignIn(){
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
-    const { setToken } = useContext(TokenContext)
+    const { setToken, setId } = useContext(TokenContext)
 
 
     function signIn(event){
@@ -22,8 +22,11 @@ export default function SignIn(){
 
         axios.post(`${process.env.REACT_APP_API_URL}/sign-in`, {email,password})
         .then((response) => {
-            setToken(response.data)
-            localStorage.setItem("token",JSON.stringify(response.data))
+            setToken(response.data.token)
+            localStorage.setItem("token",JSON.stringify(response.data.token))
+
+            setId(response.data.id)
+            localStorage.setItem("id",JSON.stringify(response.data.id))
             navigate("/timeline")
         })
         .catch((error) => {
