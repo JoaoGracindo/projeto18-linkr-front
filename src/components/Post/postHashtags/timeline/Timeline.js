@@ -45,6 +45,7 @@ export default function Timeline() {
 
 		try {
 			await axios.post(`${url}/post-link`, body, config);
+			await apiHashtags.postTag(description, promise.data.id, config)
 		} catch (err) {
 			alert("There was an error publishing your link");
 		}
