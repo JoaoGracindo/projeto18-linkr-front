@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const PostBoxContainer = styled.div`
+  width: 611px;
+
   font-family: "Lato", sans-serif;
 
   background-color: #151515;
@@ -13,7 +15,7 @@ export const PostBoxContainer = styled.div`
   display: flex;
   justify-content: space-between;
 
-  @media (max-width: 600px) {
+  @media (max-width: 667px) {
     width: 100vw;
   }
 `;
@@ -39,7 +41,7 @@ export const PostInfoContainer = styled.div`
 `;
 
 export const PostContentContainer = styled.div`
-  width: 500px;
+  width: 100%;
   height: 100%;
   
 
