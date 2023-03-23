@@ -6,6 +6,7 @@ import Modal from "react-modal";
 
 import LikeButton from "../../LikeButton";
 import { useState } from "react";
+import ShareButton from "../../ShareButton";
 
 Modal.setAppElement("#root");
 
@@ -19,6 +20,7 @@ export default function PostComponent({
 	liked,
 	likersNames,
 	likesCount,
+	setTimeline
 }) {
 	const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -76,6 +78,7 @@ export default function PostComponent({
 					likersNames={likersNames}
 					likesCount={likesCount}
 				/>
+				<ShareButton post_id={id} setTimeline={setTimeline}/>
 			</div>
 			<div className="rightWrapper">
 				<div className="nameContainer">
@@ -211,6 +214,7 @@ const StyledPost = styled.div`
 		height: 50px;
 		border-radius: 50%;
 		margin-top: 17px;
+		object-fit: cover;
 		@media (max-width: 375px) {
 			width: 40px;
 			height: 40px;
