@@ -60,7 +60,7 @@ export default function SignIn(){
 
                 <button type="submit">Sign In</button>
             </Form>
-            <Link to="/sign-up">Switch back to log in</Link>
+            <Link to="/sign-up">First time? Create an account!</Link>
 
         </SignUpSpace>
     )
