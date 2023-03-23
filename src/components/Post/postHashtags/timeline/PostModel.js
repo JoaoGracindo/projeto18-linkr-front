@@ -20,12 +20,15 @@ export default function PostComponent({
 	liked,
 	likersNames,
 	likesCount,
+	timeline,
+	setTimeline,
 }) {
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const [editMode, setEditMode] = useState(false);
 	const [newDescription, setNewDescription] = useState(description);
 	const [shownDescription, setShownDescription] = useState(description);
-	const [disable, setDisable] = useState(false)
+	const [disable, setDisable] = useState(false);
+	const [loading, setLoading] = useState(false);
 
 	const token = JSON.parse(localStorage.token);
 	const config = {
@@ -44,35 +47,52 @@ export default function PostComponent({
 		setIsOpen(false);
 	}
 
-	async function handleKeyPress(e){
-		if(e.key === 'Enter'){
+	function refreshTimeline() {
+		axios
+			.get(`${url}/timeline`, config)
+			.then((response) => {
+				setTimeline([...response.data]);
+				closeModal();
+				setLoading(false);
+			})
+			.catch((err) => {
+				alert(
+					"An error occured while trying to fetch the posts, please refresh the page"
+				);
+			});
+	}
+
+	async function handleKeyPress(e) {
+		if (e.key === "Enter") {
 			setDisable(true);
 			await editPost(id);
 			setDisable(false);
 			setEditMode(!editMode);
 		}
-		if(e.key === 'Escape'){
+		if (e.key === "Escape") {
 			setEditMode(!editMode);
 			setNewDescription(description);
 		}
 	}
 
-
 	function deletePost(id) {
+		setLoading(true);
 		axios
 			.delete(`${url}/link/${id}`, config)
 			.then((response) => {
-				closeModal();
+				refreshTimeline();
 				console.log(response);
 			})
 			.catch((response) => {
 				console.log(response);
+				setLoading(false);
 				alert("Cannot delete post. Try again later.");
 			});
+			
 	}
 	function editPost(id) {
 		axios
-			.put(`${url}/link/${id}`,{description: newDescription}, config)
+			.put(`${url}/link/${id}`, { description: newDescription }, config)
 			.then((response) => {
 				console.log(response);
 				setShownDescription(newDescription);
@@ -157,21 +177,27 @@ export default function PostComponent({
 				isOpen={modalIsOpen}
 				onRequestClose={closeModal}
 				style={modalStyle}>
-				<h1 style={modalTitle}>
-					Are you sure you want <br /> to delete this post?
-				</h1>
-				<div>
-					<button
-						style={modalCancel}
-						onClick={closeModal}>
-						No, go back
-					</button>
-					<button
-						style={modalConfirm}
-						onClick={() => deletePost(id)}>
-						Yes, delete it
-					</button>
-				</div>
+				{loading ? (
+					<h1 style={modalTitle}>Loading...</h1>
+				) : (
+					<>
+						<h1 style={modalTitle}>
+							Are you sure you want <br /> to delete this post?
+						</h1>
+						<div>
+							<button
+								style={modalCancel}
+								onClick={closeModal}>
+								No, go back
+							</button>
+							<button
+								style={modalConfirm}
+								onClick={() => deletePost(id)}>
+								Yes, delete it
+							</button>
+						</div>
+					</>
+				)}
 			</Modal>
 		</StyledPost>
 	);
@@ -236,19 +262,19 @@ const StyledPost = styled.div`
 	font-family: Lato, "sans-serif";
 	color: white;
 
-	.editInput{
+	.editInput {
 		box-sizing: border-box;
 		width: 100%;
 		min-height: 20px;
 		max-height: fit-content;
 		line-break: anywhere;
 		border-radius: 7px;
-		font-family: 'Lato';
+		font-family: "Lato";
 		font-style: normal;
 		font-weight: 400;
 		font-size: 14px;
 		line-height: 17px;
-		color: #4C4C4C;
+		color: #4c4c4c;
 		word-break: break-all;
 	}
 

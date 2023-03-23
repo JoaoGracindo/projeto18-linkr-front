@@ -88,6 +88,8 @@ export default function Timeline() {
 					<PostBox
 						key={object.id}
 						{...object}
+						setTimeline={setTimeline}
+						timeline={timeline}
 					/>
 				))}
 			</StyledFeed>
