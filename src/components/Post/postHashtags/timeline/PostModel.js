@@ -5,7 +5,7 @@ import axios from "axios";
 import Modal from "react-modal";
 
 import LikeButton from "../../LikeButton";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import PostHashtags from "../postHashtags";
 
 Modal.setAppElement("#root");
@@ -22,6 +22,8 @@ export default function PostComponent({
 	likesCount,
 }) {
 	const [modalIsOpen, setIsOpen] = useState(false);
+	const [editMode, setEditMode] = useState(false);
+	const [newDescription, setNewDescription] = useState(description);
 
 	function openModal() {
 		setIsOpen(true);
@@ -83,12 +85,29 @@ export default function PostComponent({
 				<div className="nameContainer">
 					<p>{name}</p>
 					<div className="post-options">
-						<GoPencil onClick={() => editPost(id)} />
+						<GoPencil
+							onClick={() => {
+								setEditMode(!editMode);
+								setNewDescription(description);
+							}}
+						/>
 						<FiTrash2 onClick={openModal} />
 					</div>
 				</div>
 				<div className="contentContainer">
-					<div className="description"><PostHashtags><p>{description}</p></PostHashtags></div>
+					{editMode ? (
+						<input
+							onChange={(e) => setNewDescription(e.target.value)}
+							value={newDescription}
+							autoFocus
+						/>
+					) : (
+						<div className="description">
+							<PostHashtags>
+								<p>{description}</p>
+							</PostHashtags>
+						</div>
+					)}
 					<div
 						className="link"
 						onClick={() => window.open(url_metadata.url, "_blank")}>
@@ -282,6 +301,8 @@ const StyledPost = styled.div`
 		word-break: break-all;
 		border-radius: 7px;
 		color: #b7b7b7;
+	}
+	.editInput {
 	}
 	.link {
 		box-sizing: border-box;
