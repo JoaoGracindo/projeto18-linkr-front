@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import apiHashtags from "../../../../services/apiHashtags";
 
 export default function Timeline() {
 	const [timeline, setTimeline] = useState([]);
@@ -44,7 +45,8 @@ export default function Timeline() {
 		};
 
 		try {
-			await axios.post(`${url}/post-link`, body, config);
+			const promise = await axios.post(`${url}/post-link`, body, config);
+			await apiHashtags.postTag(description, promise.data.id, config)
 		} catch (err) {
 			alert("There was an error publishing your link");
 		}

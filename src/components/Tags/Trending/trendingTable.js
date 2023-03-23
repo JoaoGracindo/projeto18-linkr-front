@@ -23,7 +23,7 @@ export default function TrendingTags() {
             <Header>trending</Header>
             <TagsContainer>
                 {tags ? tags.map((tag) => {
-                    return <TagName key={`${tag}`} name={"# " + tag} />;
+                    return <TagName key={`${tag}`} tag={tag} />;
                 }) : <></>}
             </TagsContainer>
         </Container>
