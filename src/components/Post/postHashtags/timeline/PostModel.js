@@ -21,6 +21,7 @@ export default function PostComponent({
 	liked,
 	likersNames,
 	likesCount,
+	setTimeline
 }) {
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const [editMode, setEditMode] = useState(false);
