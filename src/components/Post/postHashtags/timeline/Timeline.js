@@ -86,9 +86,10 @@ export default function Timeline() {
 			<StyledFeed>
 				{timeline.map((object) => (
 					<PostBox
-						setTimeline={setTimeline}
 						key={object.id}
 						{...object}
+						setTimeline={setTimeline}
+						timeline={timeline}
 					/>
 				))}
 			</StyledFeed>
