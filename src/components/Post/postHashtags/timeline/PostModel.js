@@ -5,7 +5,7 @@ import axios from "axios";
 import Modal from "react-modal";
 
 import LikeButton from "../../LikeButton";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import PostHashtags from "../postHashtags";
 
 Modal.setAppElement("#root");
@@ -24,14 +24,8 @@ export default function PostComponent({
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const [editMode, setEditMode] = useState(false);
 	const [newDescription, setNewDescription] = useState(description);
-
-	function openModal() {
-		setIsOpen(true);
-	}
-
-	function closeModal() {
-		setIsOpen(false);
-	}
+	const [shownDescription, setShownDescription] = useState(description);
+	const [disable, setDisable] = useState(false)
 
 	const token = JSON.parse(localStorage.token);
 	const config = {
@@ -41,6 +35,28 @@ export default function PostComponent({
 	};
 	const userId = JSON.parse(localStorage.id);
 	const url = process.env.REACT_APP_API_URL;
+
+	function openModal() {
+		setIsOpen(true);
+	}
+
+	function closeModal() {
+		setIsOpen(false);
+	}
+
+	async function handleKeyPress(e){
+		if(e.key === 'Enter'){
+			setDisable(true);
+			await editPost(id);
+			setDisable(false);
+			setEditMode(!editMode);
+		}
+		if(e.key === 'Escape'){
+			setEditMode(!editMode);
+			setNewDescription(description);
+		}
+	}
+
 
 	function deletePost(id) {
 		axios
@@ -56,13 +72,14 @@ export default function PostComponent({
 	}
 	function editPost(id) {
 		axios
-			.delete(`${url}/link/${id}`, config)
+			.put(`${url}/link/${id}`,{description: newDescription}, config)
 			.then((response) => {
 				console.log(response);
+				setShownDescription(newDescription);
 			})
 			.catch((response) => {
 				console.log(response);
-				alert("Cannot delete post. Try again later.");
+				alert("Cannot edit post. Try again later.");
 			});
 	}
 
@@ -88,7 +105,7 @@ export default function PostComponent({
 						<GoPencil
 							onClick={() => {
 								setEditMode(!editMode);
-								setNewDescription(description);
+								setNewDescription(shownDescription);
 							}}
 						/>
 						<FiTrash2 onClick={openModal} />
@@ -100,11 +117,14 @@ export default function PostComponent({
 							onChange={(e) => setNewDescription(e.target.value)}
 							value={newDescription}
 							autoFocus
+							onKeyDown={handleKeyPress}
+							disabled={disable}
+							className="editInput"
 						/>
 					) : (
 						<div className="description">
 							<PostHashtags>
-								<p>{description}</p>
+								<p>{shownDescription}</p>
 							</PostHashtags>
 						</div>
 					)}
@@ -215,6 +235,22 @@ const StyledPost = styled.div`
 	display: flex;
 	font-family: Lato, "sans-serif";
 	color: white;
+
+	.editInput{
+		box-sizing: border-box;
+		width: 100%;
+		min-height: 20px;
+		max-height: fit-content;
+		line-break: anywhere;
+		border-radius: 7px;
+		font-family: 'Lato';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 17px;
+		color: #4C4C4C;
+		word-break: break-all;
+	}
 
 	@media (max-width: 375px) {
 		min-height: 232px;
