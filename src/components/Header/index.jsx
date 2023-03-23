@@ -5,51 +5,48 @@ import { AiOutlineDown } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { TokenContext } from "../../context/UserContext";
+import SearchBar from "../SearchBar/SearchBar";
 
 export default function Header() {
+  const [clicked, setClicked] = useState(false);
+  const { token } = useContext(TokenContext);
+  const navigate = useNavigate();
 
-  const [ clicked, setClicked ] = useState(false)
-  const { token } = useContext(TokenContext)
-  const navigate = useNavigate()
-
- 
-
-  function click(){
-    if(clicked){
-      setClicked(false)
-    }else{setClicked(true)}
+  function click() {
+    setClicked(!clicked)
   }
 
-  function logout(){
-
-    const config = { 
-      headers:{
-      authorization: `Bearer ${token}`
-      }
-
-      
+  function logout() {
+    const config = {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .delete(`${process.env.REACT_APP_API_URL}/logout`, config)
+      .then(() => {
+        localStorage.removeItem("token");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
-    axios.delete(`${process.env.REACT_APP_API_URL}/logout`,config)
-    .then(() => {
-      localStorage.removeItem("token")
-      navigate("/")})
-    .catch((error) => {console.log(error)})
-  }
-  
+
   return (
     <HeaderContainer>
       <img src={logo} alt="logo" />
-      <input type="text" placeholder="Search for people" />
+      <SearchBar />
       <div onClick={click}>
-        <AiOutlineDown clicked={clicked}/>
-        
+        <AiOutlineDown clicked={clicked} />
+
         <img
           src="https://e7.pngegg.com/pngimages/708/344/png-clipart-dogs-dogs.png"
           alt="user"
         />
       </div>
       <Options clicked={clicked}>
-          <p onClick={logout}>Logout</p>
+        <p onClick={logout}>Logout</p>
       </Options>
     </HeaderContainer>
   );

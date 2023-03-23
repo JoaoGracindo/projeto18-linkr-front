@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const HeaderContainer = styled.div`
   height: 72px;
-  width: 100%;
+  width: 100vw;
+
   position: fixed;
   top: 0px;
   left: 0px;
@@ -15,27 +16,6 @@ export const HeaderContainer = styled.div`
   align-items: center;
 
   padding-inline: 30px;
-
-  input {
-    height: 45px;
-    width: 40%;
-
-    font-size: 20px;
-
-    padding-left: 15px;
-
-    border: none;
-    border-radius: 5px;
-  }
-
-  input::placeholder {
-    font-style: italic;
-    color: #868686;
-  }
-
-  input:focus {
-    outline: none;
-  }
 
   div {
     img {
@@ -73,13 +53,18 @@ export const Options = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
     width: 150px;
     height: 47px;
+
     background-color: ${props => props.clicked ? "#171717" : "#151515"};
+
     border-radius: 0px 0px 0px 50px;
+
     position: absolute;
     top: ${props => props.clicked ? "72px" : "25px"};
     right: 0px;
+    
     font-family: 'Lato', sans-serif;
     font-weight: 700;
     font-size: 17px;

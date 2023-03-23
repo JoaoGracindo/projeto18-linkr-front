@@ -12,7 +12,7 @@ import axios from "axios";
 export default function UserPage() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [post, setPost] = useState([]);
+  const [posts, setPosts] = useState([]);
   const token = JSON.parse(localStorage.token);
   const config = {
     headers: {
@@ -20,46 +20,46 @@ export default function UserPage() {
     },
   };
 
-  useEffect((e) => {
+  useEffect(() => {
     if (localStorage.token == undefined) {
       navigate("/");
     }
     axios
       .get(`${process.env.REACT_APP_API_URL}/user/${id}`, config)
       .then((response) => {
-        setPost([...response.data]);
-        const oi = [...response.data];
-        console.log(oi[0]);
+        setPosts([...response.data]);
+      })
+      .catch((response) => {
+        console.log(response.message);
       });
-  }, []);
+  }, [id]);
 
   return (
     <>
       <BlackBody />
       <Header />
 
-      <UserPageContainer>
-        <input type="text" placeholder="Pesquise um usuário" />
-        <TitleContainer>
-          <img
-            src="https://e7.pngegg.com/pngimages/708/344/png-clipart-dogs-dogs.png"
-            alt="user"
-          />
-          <h1>{}'s posts</h1>
-        </TitleContainer>
-        <FeedContainer>
-          <div>
-            <PostBox />
-            <PostBox />
-            <PostBox />
-            <PostBox />
-            <PostBox />
-            <PostBox />
-            <PostBox />
-          </div>
-          <TrendingTags />
-        </FeedContainer>
-      </UserPageContainer>
+      {posts.length > 0 ? (
+        <UserPageContainer>
+          <input type="text" placeholder="Pesquise um usuário" />
+          <TitleContainer>
+            <img src={posts[0]?.pic_url} alt="user" />
+            <h1>{posts[0]?.name}'s posts</h1>
+          </TitleContainer>
+          <FeedContainer>
+            <div>
+              {posts.map((p) => (
+                <PostBox key={p.id} {...p} />
+              ))}
+            </div>
+            <TrendingTags />
+          </FeedContainer>
+        </UserPageContainer>
+      ) : (
+        <UserPageContainer>
+          <h1>Esse usuário não possui posts</h1>
+        </UserPageContainer>
+      )}
     </>
   );
 }

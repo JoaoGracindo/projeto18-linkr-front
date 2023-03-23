@@ -7,8 +7,10 @@ import LikeButton from "../Post/LikeButton";
 import { Link } from "react-router-dom";
 
 export default function PostBox({
+  id,
   pic_url,
-  num_likes,
+  likesCount,
+  likersNames,
   description,
   name,
   owner,
@@ -19,7 +21,7 @@ export default function PostBox({
         <Link to={`/user/${owner}`}>
           <img src={pic_url} alt={name} />
         </Link>
-        <LikeButton />
+        <LikeButton likesCount={likesCount} likersNames={likersNames} postId={id}/>
       </PostInfoContainer>
       <PostContentContainer>
         <h3>{name}</h3>

@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { TokenContext } from "../../context/UserContext";
 import apiLikes from "../../services/apiLikes";
 
-export default function LikeButton({ postId }) {
+export default function LikeButton({ postId, likesCount, likersNames }) {
   const [liked, setLiked] = useState(false);
 
   const { token } = useContext(TokenContext);
