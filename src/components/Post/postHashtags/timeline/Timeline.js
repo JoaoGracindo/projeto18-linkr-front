@@ -10,6 +10,7 @@ import TrendingTags from "../../../Tags/Trending/trendingTable";
 import { UserPageContainer } from "../../../../pages/UserPage/style";
 
 export default function Timeline() {
+	const [posts, setPosts] = useState([])
 	const [timeline, setTimeline] = useState([]);
 	const [link, setLink] = useState("");
 	const [description, setDescription] = useState("");
@@ -50,6 +51,7 @@ export default function Timeline() {
 		try {
 			const promise = await axios.post(`${url}/post-link`, body, config);
 			await apiHashtags.postTag(description, promise.data.id, config)
+			setTimeline([...timeline], )
 		} catch (err) {
 			alert("There was an error publishing your link");
 		}
@@ -92,6 +94,8 @@ export default function Timeline() {
 					<PostBox
 						key={object.id}
 						{...object}
+						setTimeline={setTimeline}
+						timeline={timeline}
 					/>
 				))}
 				</div>

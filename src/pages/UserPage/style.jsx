@@ -9,6 +9,14 @@ export const UserPageContainer = styled.div`
     display: none;
   }
 
+  h1 {
+    font-family: "Oswald", sans-serif;
+    font-size: 43px;
+    font-weight: bold;
+
+    color: white;
+  }
+
   @media (max-width: 950px) {
     width: 100vw;
   }
@@ -41,6 +49,10 @@ export const UserPageContainer = styled.div`
 
     input:focus {
       outline: none;
+    }
+
+    h1 {
+      font-size: 50px;
     }
   }
 `;

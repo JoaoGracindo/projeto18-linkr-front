@@ -9,7 +9,8 @@ export const Container = styled.div`
   color: white;
   display: flex;
   flex-direction: column;
-
+  position: fixed;
+  margin-left: 629px;
   @media (max-width: 950px) {
     display: none;
   }

@@ -1,5 +1,4 @@
 import Header from "../../components/Header/index.jsx";
-import PostBox from "../../components/PostBox/index.jsx";
 import TrendingTags from "../../components/Tags/Trending/trendingTable.js";
 import { BlackBody } from "../../styles/BlackBodyGlobalStyle";
 import { FeedContainer } from "../../styles/FeedContainer.js";
@@ -9,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import PostComponent from "../../components/Post/postHashtags/timeline/PostModel.js";
 import apiHashtags from "../../services/apiHashtags.js";
+import styled from "styled-components";
 
 export default function HashtagPage() {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export default function HashtagPage() {
       navigate("/");
     }
     getPosts(hashtag, token)
-  }, []);
+  }, [hashtag]);
 
   async function getPosts(hashtag, token){
     const promise = await apiHashtags.getHashtagPosts(hashtag, token)
@@ -51,3 +51,16 @@ export default function HashtagPage() {
     </>
   );
 }
+
+/* const FeedContainer = styled.div`
+  width: 100%;
+
+  display: flex;
+  grid-template-columns: 700px 1fr;
+  grid-template-rows: 100%;
+
+
+  @media (max-width: 950px) {
+    justify-content: center;
+  }
+`; */
