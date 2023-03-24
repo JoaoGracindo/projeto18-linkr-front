@@ -1,13 +1,13 @@
 import Header from "../../components/Header/index.jsx";
-import PostBox from "../../components/PostBox/index.jsx";
 import TrendingTags from "../../components/Tags/Trending/trendingTable.js";
 import { BlackBody } from "../../styles/BlackBodyGlobalStyle";
-import { FeedContainer } from "../../styles/FeedContainer.js";
+import { FeedContainer, FeedWrapper } from "../../styles/FeedContainer.js";
 import { TitleContainer } from "../../styles/TitleContainer.js";
 import { UserPageContainer } from "./style.jsx";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import PostComponent from "../../components/Post/postHashtags/timeline/PostModel.js";
 
 export default function UserPage() {
   const navigate = useNavigate();
@@ -28,6 +28,7 @@ export default function UserPage() {
       .get(`${process.env.REACT_APP_API_URL}/user/${id}`, config)
       .then((response) => {
         setPosts([...response.data]);
+        console.log(response.data)
       })
       .catch((response) => {
         console.log(response.message);
@@ -47,11 +48,11 @@ export default function UserPage() {
             <h1>{posts[0]?.name}'s posts</h1>
           </TitleContainer>
           <FeedContainer>
-            <div>
+            <FeedWrapper>
               {posts.map((p) => (
-                <PostBox key={p.id} {...p} />
+                <PostComponent key={p.id} {...p} />
               ))}
-            </div>
+            </FeedWrapper>
             <TrendingTags />
           </FeedContainer>
         </UserPageContainer>
