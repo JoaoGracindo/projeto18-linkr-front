@@ -200,9 +200,9 @@ const StyledPost = styled.div`
 		color: #ffffff;
 	}
 
-	@media (max-width: 700px) {
+	@media (max-width: 600px) {
 		width: 100%;
-		height: 164px;
+		min-height: 164px;
 		padding: 0px;
 		border-radius: 0px;
 		display: flex;
@@ -210,8 +210,13 @@ const StyledPost = styled.div`
 		align-items: center;
 		text-align: center;
 		margin-bottom: 0px;
+		transition: all linear .2s;
 		img {
 			display: none;
+		}
+
+		p{
+			margin-top: 10px;
 		}
 
 		form {
@@ -219,19 +224,27 @@ const StyledPost = styled.div`
 			flex-direction: column;
 			align-items: center;
 			width: 345px;
+			height: 120%;
 			position: relative;
+			margin-bottom: 20px;
 		}
 
 		input {
 			width: 344px;
+			margin-top: 5px;
 		}
 		.description {
 			min-height: 47px;
 		}
 		button {
-			bottom: -30px;
+			bottom: -5px;
 			right: 0px;
 			height: 22px;
 		}
+	}
+
+	@media (max-width:600px) {
+		min-width: 100%;
+		min-height: 164px;
 	}
 `;
