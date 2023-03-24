@@ -5,6 +5,9 @@ import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import apiHashtags from "../../../../services/apiHashtags";
+import { FeedContainer } from "../../../../styles/FeedContainer";
+import TrendingTags from "../../../Tags/Trending/trendingTable";
+import { UserPageContainer } from "../../../../pages/UserPage/style";
 
 export default function Timeline() {
 	const [timeline, setTimeline] = useState([]);
@@ -57,7 +60,7 @@ export default function Timeline() {
 	if (!timeline) return <>Loading</>;
 
 	return (
-		<Conteiner>
+		<UserPageContainer>
             <Header/>
 			<StyledPost>
 				<div>
@@ -83,7 +86,8 @@ export default function Timeline() {
 					<button type="submit">Publish</button>
 				</form>
 			</StyledPost>
-			<StyledFeed>
+			<FeedContainer>
+				<div>
 				{timeline.map((object) => (
 					<PostBox
 						key={object.id}
@@ -91,12 +95,14 @@ export default function Timeline() {
 						setTimeline={setTimeline}
 					/>
 				))}
-			</StyledFeed>
-		</Conteiner>
+				</div>
+				<TrendingTags/>
+			</FeedContainer>
+		</UserPageContainer>
 	);
 }
 
-const Conteiner = styled.div`
+const Container = styled.div`
     margin-top: 100px;
     margin-bottom: 30px;
     display: flex;
