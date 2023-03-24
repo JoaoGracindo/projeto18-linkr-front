@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import apiHashtags from "../../../../services/apiHashtags";
 
 export default function Timeline() {
+	const [posts, setPosts] = useState([])
 	const [timeline, setTimeline] = useState([]);
 	const [link, setLink] = useState("");
 	const [description, setDescription] = useState("");
@@ -47,6 +48,7 @@ export default function Timeline() {
 		try {
 			const promise = await axios.post(`${url}/post-link`, body, config);
 			await apiHashtags.postTag(description, promise.data.id, config)
+			setTimeline([...timeline], )
 		} catch (err) {
 			alert("There was an error publishing your link");
 		}

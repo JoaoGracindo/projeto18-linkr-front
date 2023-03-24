@@ -8,7 +8,7 @@ import apiLikes from "../../services/apiLikes";
 
 export default function LikeButton({ post_id, likersNames, likesCount, liked }) {
   const [localLiked, setLiked] = useState(liked);
-  const [localLikesCount, setLikesCount] = useState(likesCount)
+  const [localLikesCount, setLikesCount] = useState(Number(likesCount))
   const token = JSON.parse(localStorage.token);
   
   async function postLike( token, post_id ) {
@@ -75,11 +75,11 @@ export default function LikeButton({ post_id, likersNames, likesCount, liked }) 
           style={heartStyled}
           data-tooltip-id="like-tooltip"
           data-tooltip-content={tooltipText}
-          onClick={() => {
+          onClick={async () => {
             setLiked(!localLiked)
             setLikesCount(localLikesCount-1)
             handleTooltipText()
-            deleteLike( token, post_id );
+            await deleteLike( token, post_id );
           }}
         />
       ) : (
@@ -87,11 +87,11 @@ export default function LikeButton({ post_id, likersNames, likesCount, liked }) 
           style={heartStyled}
           data-tooltip-id="like-tooltip"
           data-tooltip-content={tooltipText}
-          onClick={() => {
+          onClick={async () => {
             setLiked(!localLiked)
             setLikesCount(localLikesCount+1)
             handleTooltipText()
-            postLike( token, post_id );
+            await postLike( token, post_id );
           }}
         />
       )}

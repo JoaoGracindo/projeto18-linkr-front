@@ -4,6 +4,11 @@ export const TitleContainer = styled.div`
   display: flex;
 
   margin: 55px 0;
+  font-family: "Oswald", sans-serif;
+  font-size: 43px;
+  font-weight: bold;
+
+  color: white;
 
   img {
     width: 50px;
