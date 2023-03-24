@@ -1,7 +1,7 @@
 import Header from "../../components/Header/index.jsx";
 import TrendingTags from "../../components/Tags/Trending/trendingTable.js";
 import { BlackBody } from "../../styles/BlackBodyGlobalStyle";
-import { FeedContainer } from "../../styles/FeedContainer.js";
+import { FeedContainer, FeedWrapper } from "../../styles/FeedContainer.js";
 import { TitleContainer } from "../../styles/TitleContainer.js";
 import { UserPageContainer } from "./style.jsx";
 import { useEffect, useState } from "react";
@@ -48,11 +48,11 @@ export default function UserPage() {
             <h1>{posts[0]?.name}'s posts</h1>
           </TitleContainer>
           <FeedContainer>
-            <div>
+            <FeedWrapper>
               {posts.map((p) => (
                 <PostComponent key={p.id} {...p} />
               ))}
-            </div>
+            </FeedWrapper>
             <TrendingTags />
           </FeedContainer>
         </UserPageContainer>

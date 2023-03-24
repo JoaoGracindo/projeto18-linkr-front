@@ -1,7 +1,7 @@
 import Header from "../../components/Header/index.jsx";
 import TrendingTags from "../../components/Tags/Trending/trendingTable.js";
 import { BlackBody } from "../../styles/BlackBodyGlobalStyle";
-import { FeedContainer } from "../../styles/FeedContainer.js";
+import { FeedContainer, FeedWrapper } from "../../styles/FeedContainer.js";
 import { TitleContainer } from "../../styles/TitleContainer.js";
 import { UserPageContainer } from "./style.js";
 import { useEffect, useState } from "react";
@@ -39,12 +39,12 @@ export default function HashtagPage() {
           <h1>{"# " + hashtag}</h1>
         </TitleContainer>
         <FeedContainer>
-          <div>
+          <FeedWrapper>
             {posts ? 
                 posts.map(post => <PostComponent key={post.id} {...post} />) 
                 : <></>
             }
-          </div>
+          </FeedWrapper>
           <TrendingTags />
         </FeedContainer>
       </UserPageContainer>

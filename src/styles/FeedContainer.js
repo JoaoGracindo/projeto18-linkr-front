@@ -10,3 +10,10 @@ export const FeedContainer = styled.div`
     justify-content: center;
   }
 `;
+
+export const FeedWrapper = styled.div`
+height: fit-content;
+display: flex;
+flex-direction: column;
+gap: 16px 0px
+`

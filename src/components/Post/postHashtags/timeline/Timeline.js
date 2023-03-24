@@ -5,7 +5,7 @@ import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import apiHashtags from "../../../../services/apiHashtags";
-import { FeedContainer } from "../../../../styles/FeedContainer";
+import { FeedContainer, FeedWrapper } from "../../../../styles/FeedContainer";
 import TrendingTags from "../../../Tags/Trending/trendingTable";
 import { UserPageContainer } from "../../../../pages/UserPage/style";
 
@@ -64,6 +64,8 @@ export default function Timeline() {
 	return (
 		<UserPageContainer>
             <Header/>
+			<FeedContainer>
+			<FeedWrapper>
 			<StyledPost>
 				<div>
 					<img
@@ -88,8 +90,7 @@ export default function Timeline() {
 					<button type="submit">Publish</button>
 				</form>
 			</StyledPost>
-			<FeedContainer>
-				<div>
+				
 				{timeline.map((object) => (
 					<PostBox
 						key={object.id}
@@ -98,7 +99,7 @@ export default function Timeline() {
 						timeline={timeline}
 					/>
 				))}
-				</div>
+				</FeedWrapper>
 				<TrendingTags/>
 			</FeedContainer>
 		</UserPageContainer>
@@ -130,6 +131,7 @@ const StyledPost = styled.div`
 	background-color: white;
 	position: relative;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	margin-bottom: 13px;
 
 	img {
 		width: 50px;
@@ -206,7 +208,7 @@ const StyledPost = styled.div`
 		flex-direction: column;
 		align-items: center;
 		text-align: center;
-
+		margin-bottom: 0px;
 		img {
 			display: none;
 		}
