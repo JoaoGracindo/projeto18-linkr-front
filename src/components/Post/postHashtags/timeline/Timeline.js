@@ -5,7 +5,9 @@ import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import apiHashtags from "../../../../services/apiHashtags";
+
 import { FeedContainer, FeedWrapper } from "../../../../styles/FeedContainer";
+
 import TrendingTags from "../../../Tags/Trending/trendingTable";
 import { UserPageContainer } from "../../../../pages/UserPage/style";
 
@@ -90,7 +92,6 @@ export default function Timeline() {
 					<button type="submit">Publish</button>
 				</form>
 			</StyledPost>
-				
 				{timeline.map((object) => (
 					<PostBox
 						key={object.id}
@@ -99,6 +100,7 @@ export default function Timeline() {
 						timeline={timeline}
 					/>
 				))}
+
 				</FeedWrapper>
 				<TrendingTags/>
 			</FeedContainer>
