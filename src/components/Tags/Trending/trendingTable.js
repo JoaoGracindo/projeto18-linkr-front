@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react";
 import apiHashtags from "../../../services/apiHashtags";
+
 import { Container, TagsContainer, Header } from "./styledTrending";
 import TagName from "./TagName";
 

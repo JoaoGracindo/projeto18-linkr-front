@@ -5,6 +5,7 @@ export const FeedContainer = styled.div`
 
   display: flex;
   justify-content: space-between;
+  position: relative;
 
   @media (max-width: 950px) {
     justify-content: center;
