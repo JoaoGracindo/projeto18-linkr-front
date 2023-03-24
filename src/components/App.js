@@ -3,7 +3,7 @@ import TokenProvider from '../context/UserContext';
 import HashtagPage from '../pages/HashtagPage/HashtagPage';
 import UserPage from '../pages/UserPage';
 import GlobalStyled from './GlobalStyled';
-import Timeline from './Post/postHashtags/timeline/Timeline';
+import Timeline from './Post/timeline/Timeline';
 import SignInPage from './SignFunctions/signInPage';
 import SignUpPage from './SignFunctions/signUpPage';
 
