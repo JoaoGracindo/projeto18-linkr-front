@@ -18,7 +18,6 @@ export default function SearchBar() {
         .then((response) => {
           setDisplayResult(true);
           setNamesSearched(response.data);
-          console.log(response.data);
         })
         .catch((response) => {
           console.log(response.message);
@@ -29,7 +28,7 @@ export default function SearchBar() {
   }
 
   return (
-    <SearchBarContainer>
+    <SearchBarContainer className="searchBar">
       <DebounceInput
         type="text"
         minLength={3}
@@ -46,7 +45,14 @@ export default function SearchBar() {
       />
       <SearchBarResults displayResult={displayResult}>
         {namesSearched.length !== 0 ? (
-          namesSearched.map((n) => <SearchBarUser key={n.id} {...n} />)
+          namesSearched.map((n) => (
+            <SearchBarUser
+              key={n.id}
+              {...n}
+              setDisplayResult={setDisplayResult}
+              setInputValue={setInputValue}
+            />
+          ))
         ) : (
           <p>Nenhum usuário encontrado</p>
         )}

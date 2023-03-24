@@ -405,7 +405,7 @@ const StyledPost = styled.div`
 		}
 	}
 	.metadata-text {
-		width: 348px;
+		width: 65%;
 		height: 155px;
 		box-sizing: border-box;
 		display: flex;

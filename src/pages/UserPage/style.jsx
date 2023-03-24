@@ -5,6 +5,10 @@ export const UserPageContainer = styled.div`
 
   margin: 150px auto;
 
+  .searchBar {
+    display: none;
+  }
+
   > input {
     display: none;
   }
@@ -26,9 +30,13 @@ export const UserPageContainer = styled.div`
     flex-direction: column;
     align-items: center;
 
+    .searchBar {
+      display: block;
+    }
+
     input {
       height: 45px;
-      width: 90%;
+      width: 100%;
 
       font-size: 17px;
 
@@ -38,8 +46,6 @@ export const UserPageContainer = styled.div`
       border-radius: 5px;
 
       display: block;
-
-      margin: 20px 0;
     }
 
     input::placeholder {

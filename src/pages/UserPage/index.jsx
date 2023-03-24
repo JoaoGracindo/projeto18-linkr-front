@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import PostComponent from "../../components/Post/postHashtags/timeline/PostModel.js";
+import SearchBar from "../../components/SearchBar/SearchBar.jsx";
 
 export default function UserPage() {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ export default function UserPage() {
       .get(`${process.env.REACT_APP_API_URL}/user/${id}`, config)
       .then((response) => {
         setPosts([...response.data]);
-        console.log(response.data)
+        console.log(response.data);
       })
       .catch((response) => {
         console.log(response.message);
@@ -42,7 +43,7 @@ export default function UserPage() {
 
       {posts.length > 0 ? (
         <UserPageContainer>
-          <input type="text" placeholder="Pesquise um usuário" />
+          <SearchBar />
           <TitleContainer>
             <img src={posts[0]?.pic_url} alt="user" />
             <h1>{posts[0]?.name}'s posts</h1>
