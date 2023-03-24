@@ -202,7 +202,7 @@ const StyledPost = styled.div`
 	}
 
 	@media (max-width: 600px) {
-		width: 100%;
+		min-width: 100%;
 		min-height: 164px;
 		padding: 0px;
 		border-radius: 0px;
