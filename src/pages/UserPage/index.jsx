@@ -7,7 +7,7 @@ import { UserPageContainer } from "./style.jsx";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import PostComponent from "../../components/Post/postHashtags/timeline/PostModel.js";
+import PostComponent from "../../components/Post/timeline/PostModel.js";
 import SearchBar from "../../components/SearchBar/SearchBar.jsx";
 
 export default function UserPage() {
