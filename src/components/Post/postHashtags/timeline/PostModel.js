@@ -289,6 +289,9 @@ const StyledPost = styled.div`
 		border: none;
 		border-radius: 0px;
 	}
+	@media (max-width: 611px) {
+		width: 100vw;
+	}
 	.user-img {
 		width: 50px;
 		height: 50px;
