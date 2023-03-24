@@ -10,6 +10,7 @@ import { FeedContainer, FeedWrapper } from "../../../styles/FeedContainer";
 
 import TrendingTags from "../../Tags/Trending/trendingTable";
 import { UserPageContainer } from "../../../pages/UserPage/style";
+import { TitleContainer } from "../../../styles/TitleContainer";
 
 export default function Timeline() {
 	const [posts, setPosts] = useState([]);
@@ -64,8 +65,12 @@ export default function Timeline() {
 	if (!timeline) return <>Loading</>;
 
 	return (
-		<UserPageContainer>
+		<>
 			<Header />
+		<UserPageContainer>
+			<TitleContainer>
+				{"timeline"}
+			</TitleContainer>
 			<FeedContainer>
 				<FeedWrapper>
 					<StyledPost>
@@ -103,6 +108,7 @@ export default function Timeline() {
 				<TrendingTags />
 			</FeedContainer>
 		</UserPageContainer>
+		</>
 	);
 }
 
