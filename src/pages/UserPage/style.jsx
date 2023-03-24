@@ -61,4 +61,10 @@ export const UserPageContainer = styled.div`
       font-size: 50px;
     }
   }
-`;
+  @media (max-width: 375px) {
+    margin: 72px 0px 0px 0px;
+    h1 {
+      font-size: 33px;
+    }
+  }
+  `;

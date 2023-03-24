@@ -5,12 +5,11 @@ import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import apiHashtags from "../../../services/apiHashtags";
-
 import { FeedContainer, FeedWrapper } from "../../../styles/FeedContainer";
-
 import TrendingTags from "../../Tags/Trending/trendingTable";
 import { UserPageContainer } from "../../../pages/UserPage/style";
 import SearchBar from "../../SearchBar/SearchBar";
+import { TitleContainer } from "../../../styles/TitleContainer";
 
 export default function Timeline() {
   const [timeline, setTimeline] = useState([]);
@@ -67,7 +66,8 @@ export default function Timeline() {
     <>
       <Header />
       <UserPageContainer>
-        <SearchBar />
+		<SearchBar />
+        <TitleContainer>timeline</TitleContainer>
         <FeedContainer>
           <FeedWrapper>
             <StyledPost>

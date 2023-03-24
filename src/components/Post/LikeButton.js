@@ -48,12 +48,12 @@ export default function LikeButton({ post_id, likersNames, likesCount, liked }) 
     if(localLiked){
       tooltipText += "Você"
       if(localLikesCount === 2) tooltipText += ` e ${likersNames[0]}` 
-      if(localLikesCount >= 2) tooltipText += `, ${likersNames[0]} e outras ${localLikesCount - 2} pessoas` 
+      if(localLikesCount > 2) tooltipText += `, ${likersNames[0]} e outras ${localLikesCount - 2} pessoas` 
     }
     if(!localLiked && localLikesCount >= 1){
       tooltipText = `${likersNames[0]}`
       if(localLikesCount === 2) tooltipText += ` e ${likersNames[1]}` 
-      if(localLikesCount >= 2) tooltipText += `, ${likersNames[1]} e outras ${likesCount - 2} pessoas` 
+      if(localLikesCount > 2) tooltipText += `, ${likersNames[1]} e outras ${likesCount - 2} pessoas` 
     }
   }
 
