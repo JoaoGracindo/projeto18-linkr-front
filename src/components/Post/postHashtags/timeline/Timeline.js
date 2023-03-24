@@ -245,7 +245,7 @@ const StyledPost = styled.div`
 	}
 
 	@media (max-width:600px) {
-		height: auto;
+		min-width: 100%;
 		min-height: 164px;
 	}
 `;
