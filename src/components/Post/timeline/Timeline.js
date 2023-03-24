@@ -1,18 +1,18 @@
 import PostBox from "./PostModel";
-import Header from "../../../Header/index";
+import Header from "../../Header/index";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import apiHashtags from "../../../../services/apiHashtags";
+import apiHashtags from "../../../services/apiHashtags";
 
-import { FeedContainer, FeedWrapper } from "../../../../styles/FeedContainer";
+import { FeedContainer, FeedWrapper } from "../../../styles/FeedContainer";
 
-import TrendingTags from "../../../Tags/Trending/trendingTable";
-import { UserPageContainer } from "../../../../pages/UserPage/style";
+import TrendingTags from "../../Tags/Trending/trendingTable";
+import { UserPageContainer } from "../../../pages/UserPage/style";
 
 export default function Timeline() {
-	const [posts, setPosts] = useState([])
+	const [posts, setPosts] = useState([]);
 	const [timeline, setTimeline] = useState([]);
 	const [link, setLink] = useState("");
 	const [description, setDescription] = useState("");
@@ -52,8 +52,8 @@ export default function Timeline() {
 
 		try {
 			const promise = await axios.post(`${url}/post-link`, body, config);
-			await apiHashtags.postTag(description, promise.data.id, config)
-			setTimeline([...timeline], )
+			await apiHashtags.postTag(description, promise.data.id, config);
+			setTimeline([...timeline]);
 		} catch (err) {
 			alert("There was an error publishing your link");
 		}
@@ -65,55 +65,55 @@ export default function Timeline() {
 
 	return (
 		<UserPageContainer>
-            <Header/>
+			<Header />
 			<FeedContainer>
-			<FeedWrapper>
-			<StyledPost>
-				<div>
-					<img
-						src="https://ovicio.com.br/wp-content/uploads/2023/03/20230319-tom-taylor-mostra-um-terrivel-ra-277x277.jpg"
-						alt="vilao"
-					/>
-					<p>What are you going to share today?</p>
-				</div>
-				<form onSubmit={handleForm}>
-					<input
-						placeholder="https://..."
-						onChange={(e) => setLink(e.target.value)}
-						value={link}
-						type="url"
-					/>
-					<input
-						className="description"
-						placeholder="Awesome article about #javascript"
-						onChange={(e) => setDescription(e.target.value)}
-						value={description}
-					/>
-					<button type="submit">Publish</button>
-				</form>
-			</StyledPost>
-				{timeline.map((object) => (
-					<PostBox
-						key={object.id}
-						{...object}
-						setTimeline={setTimeline}
-					/>
-				))}
-
+				<FeedWrapper>
+					<StyledPost>
+						<div>
+							<img
+								src="https://ovicio.com.br/wp-content/uploads/2023/03/20230319-tom-taylor-mostra-um-terrivel-ra-277x277.jpg"
+								alt="vilao"
+							/>
+							<p>What are you going to share today?</p>
+						</div>
+						<form onSubmit={handleForm}>
+							<input
+								placeholder="https://..."
+								onChange={(e) => setLink(e.target.value)}
+								value={link}
+								type="url"
+							/>
+							<input
+								className="description"
+								placeholder="Awesome article about #javascript"
+								onChange={(e) => setDescription(e.target.value)}
+								value={description}
+							/>
+							<button type="submit">Publish</button>
+						</form>
+					</StyledPost>
+					{timeline.map((object) => (
+						<PostBox
+							key={object.id}
+							{...object}
+							setTimeline={setTimeline}
+						/>
+					))}
 				</FeedWrapper>
-				<TrendingTags/>
+				<TrendingTags />
 			</FeedContainer>
 		</UserPageContainer>
 	);
 }
 
+
 const Container = styled.div`
-    margin-top: 100px;
-    margin-bottom: 30px;
-    display: flex;
+	margin-top: 100px;
+	margin-bottom: 30px;
+	display: flex;
 	flex-direction: column;
 	align-items: center;
-`
+`;
 
 const StyledFeed = styled.div`
 	display: flex;
@@ -160,8 +160,9 @@ const StyledPost = styled.div`
 		border: none;
 		border-radius: 5px;
 		background: #efefef;
+		
 		text-justify: initial;
-
+		
 		padding: 5px 12px;
 		box-sizing: border-box;
 
@@ -169,7 +170,6 @@ const StyledPost = styled.div`
 			position: absolute;
 			top: 5px;
 			left: 12px;
-			max-width: 20px;
 			font-family: "Lato";
 			font-weight: 300;
 			font-size: 15px;
@@ -201,7 +201,7 @@ const StyledPost = styled.div`
 	}
 
 	@media (max-width: 600px) {
-		min-width: 100%;
+		width: 100%;
 		min-height: 164px;
 		padding: 0px;
 		border-radius: 0px;
@@ -210,12 +210,12 @@ const StyledPost = styled.div`
 		align-items: center;
 		text-align: center;
 		margin-bottom: 0px;
-		transition: all linear .2s;
+		transition: all linear 0.2s;
 		img {
 			display: none;
 		}
 
-		p{
+		p {
 			margin-top: 10px;
 		}
 
@@ -243,7 +243,7 @@ const StyledPost = styled.div`
 		}
 	}
 
-	@media (max-width:600px) {
+	@media (max-width: 600px) {
 		min-width: 100%;
 		min-height: 164px;
 	}

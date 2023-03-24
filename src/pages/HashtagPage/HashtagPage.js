@@ -6,9 +6,8 @@ import { TitleContainer } from "../../styles/TitleContainer.js";
 import { UserPageContainer } from "./style.js";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import PostComponent from "../../components/Post/postHashtags/timeline/PostModel.js";
+import PostComponent from "../../components/Post/timeline/PostModel.js";
 import apiHashtags from "../../services/apiHashtags.js";
-import styled from "styled-components";
 
 export default function HashtagPage() {
   const navigate = useNavigate();

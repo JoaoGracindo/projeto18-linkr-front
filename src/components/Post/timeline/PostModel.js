@@ -1,13 +1,15 @@
 import styled from "styled-components";
 import { GoPencil } from "react-icons/go";
 import { FiTrash2 } from "react-icons/fi";
+import { AiOutlineComment } from "react-icons/ai";
 import axios from "axios";
 import Modal from "react-modal";
 
-import LikeButton from "../../LikeButton";
+import LikeButton from "../LikeButton";
 import { useState } from "react";
-import ShareButton from "../../ShareButton";
-import PostHashtags from "../postHashtags";
+import ShareButton from "../ShareButton";
+import PostHashtags from "../postHashtags/postHashtags";
+import CommentButton from "../CommentButton";
 
 Modal.setAppElement("#root");
 
@@ -21,7 +23,7 @@ export default function PostComponent({
 	liked,
 	likersNames,
 	likesCount,
-	setTimeline
+	setTimeline,
 }) {
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const [editMode, setEditMode] = useState(false);
@@ -88,7 +90,6 @@ export default function PostComponent({
 				setLoading(false);
 				alert("Cannot delete post. Try again later.");
 			});
-			
 	}
 	function editPost(id) {
 		axios
@@ -106,12 +107,6 @@ export default function PostComponent({
 	return (
 		<StyledPost notOwner={owner !== userId}>
 			<div className="leftContainer">
-				<ShareBar>
-					<div>
-						<img src="assets/share.svg" alt="share"/>
-						<p>Re-posted by <span>you</span></p>
-					</div>
-				</ShareBar>
 				<img
 					className="user-img"
 					src={pic_url}
@@ -123,7 +118,11 @@ export default function PostComponent({
 					likersNames={likersNames}
 					likesCount={likesCount}
 				/>
-				<ShareButton post_id={id} setTimeline={setTimeline}/>
+				<CommentButton />
+				<ShareButton
+					post_id={id}
+					setTimeline={setTimeline}
+				/>
 			</div>
 			<div className="rightWrapper">
 				<div className="nameContainer">
@@ -268,8 +267,6 @@ const StyledPost = styled.div`
 	display: flex;
 	font-family: Lato, "sans-serif";
 	color: white;
-	position: relative;
-	margin-top: 40px;
 
 	.editInput {
 		box-sizing: border-box;
@@ -377,8 +374,6 @@ const StyledPost = styled.div`
 		border-radius: 7px;
 		color: #b7b7b7;
 	}
-	.editInput {
-	}
 	.link {
 		box-sizing: border-box;
 		display: flex;
@@ -401,19 +396,18 @@ const StyledPost = styled.div`
 		position: absolute;
 		top: -1px;
 		right: -1px;
-		background-color: blue;
 		width: 155px;
 		height: 155px;
 		border-radius: 0px 11px 11px 0px;
-		border: none;
-		// z-index: 1;
+		border: 1px solid #4d4d4d;
+		border-left: none;
 		@media (max-width: 375px) {
 			width: 95px;
 			height: 115px;
 		}
 	}
 	.metadata-text {
-		width: 65%;
+		width: 348px;
 		height: 155px;
 		box-sizing: border-box;
 		display: flex;
@@ -473,39 +467,3 @@ const StyledPost = styled.div`
 		}
 	}
 `;
-
-const ShareBar = styled.div`
-	width: 611px;
-	height: 50px;
-	border-radius: 16px 16px 0px 0px;
-	background-color: #1E1E1E;
-	position: absolute;
-	top: -33px;
-	left: 0px;
-	z-index: -1;
-
-	div{
-		display: flex;
-		align-items: center;
-	}
-
-	img{
-		width: 22px;
-		height: 12px;
-		margin: 11px 6px 10px 13px;
-		color: white;
-	}
-
-	p{
-		font-family: 'Lato';
-		font-style: normal;
-		font-weight: 400;
-		font-size: 11px;
-		line-height: 13px;
-		color: #FFFFFF;
-	}
-
-	span{
-		font-weight: 700;
-	}
-`
