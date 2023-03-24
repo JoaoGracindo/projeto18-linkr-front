@@ -89,7 +89,6 @@ export default function Timeline() {
 						key={object.id}
 						{...object}
 						setTimeline={setTimeline}
-						timeline={timeline}
 					/>
 				))}
 			</StyledFeed>
