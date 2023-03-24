@@ -106,6 +106,12 @@ export default function PostComponent({
 	return (
 		<StyledPost notOwner={owner !== userId}>
 			<div className="leftContainer">
+				<ShareBar>
+					<div>
+						<img src="assets/share.svg" alt="share"/>
+						<p>Re-posted by <span>you</span></p>
+					</div>
+				</ShareBar>
 				<img
 					className="user-img"
 					src={pic_url}
@@ -262,6 +268,8 @@ const StyledPost = styled.div`
 	display: flex;
 	font-family: Lato, "sans-serif";
 	color: white;
+	position: relative;
+	margin-top: 40px;
 
 	.editInput {
 		box-sizing: border-box;
@@ -465,3 +473,39 @@ const StyledPost = styled.div`
 		}
 	}
 `;
+
+const ShareBar = styled.div`
+	width: 611px;
+	height: 50px;
+	border-radius: 16px 16px 0px 0px;
+	background-color: #1E1E1E;
+	position: absolute;
+	top: -33px;
+	left: 0px;
+	z-index: -1;
+
+	div{
+		display: flex;
+		align-items: center;
+	}
+
+	img{
+		width: 22px;
+		height: 12px;
+		margin: 11px 6px 10px 13px;
+		color: white;
+	}
+
+	p{
+		font-family: 'Lato';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 11px;
+		line-height: 13px;
+		color: #FFFFFF;
+	}
+
+	span{
+		font-weight: 700;
+	}
+`

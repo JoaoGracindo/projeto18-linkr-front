@@ -74,7 +74,10 @@ export default function ShareButton(props){
                 </button>
                 <button
                   style={modalConfirm}
-                  onClick={() => share(post_id)}>
+                  onClick={() => {
+                    share(post_id)
+                    closeModal()
+                    }}>
                   Yes, share!
                 </button>
               </div>
