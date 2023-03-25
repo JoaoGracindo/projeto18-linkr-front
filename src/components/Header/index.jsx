@@ -9,7 +9,7 @@ import SearchBar from "../SearchBar/SearchBar";
 
 export default function Header() {
 	const [clicked, setClicked] = useState(false);
-	const { token } = useContext(TokenContext);
+	const { token, img } = useContext(TokenContext);
 	const navigate = useNavigate();
 
 	function click() {
@@ -46,7 +46,7 @@ export default function Header() {
 				<AiOutlineDown clicked={clicked} />
 
 				<img
-					src="https://e7.pngegg.com/pngimages/708/344/png-clipart-dogs-dogs.png"
+					src={img}
 					alt="user"
 				/>
 			</div>

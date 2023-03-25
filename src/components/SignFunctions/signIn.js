@@ -9,7 +9,7 @@ export default function SignIn(){
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
-    const { setToken, setId } = useContext(TokenContext)
+    const { setToken, setId, setImg } = useContext(TokenContext)
 
 
     function signIn(event){
@@ -28,6 +28,9 @@ export default function SignIn(){
 
             setId(response.data.id)
             localStorage.setItem("id",JSON.stringify(response.data.id))
+
+            setImg(response.data.img)
+            localStorage.setItem("img",JSON.stringify(response.data.img))
             navigate("/timeline")
         })
         .catch((error) => {
