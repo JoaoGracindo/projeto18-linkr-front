@@ -43,7 +43,7 @@ export const HeaderContainer = styled.div`
   }
 
   @media(max-width: 600px) {
-    input {
+    .searchBar {
       display: none;
     }
   }
