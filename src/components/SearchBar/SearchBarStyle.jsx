@@ -5,6 +5,7 @@ export const SearchBarContainer = styled.div`
   height: 45px;
 
   position: relative;
+  z-index: 2;
 
   input {
     width: 100%;
@@ -35,6 +36,10 @@ export const SearchBarContainer = styled.div`
     position: absolute;
     top: 10px;
     right: 5px;
+  }
+
+  @media(max-width: 600px) {
+    width: 95%;
   }
 `;
 
