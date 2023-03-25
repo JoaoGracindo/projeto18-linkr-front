@@ -40,6 +40,7 @@ export const SearchBarContainer = styled.div`
 
   @media(max-width: 600px) {
     width: 95%;
+    z-index: -1;
   }
 `;
 

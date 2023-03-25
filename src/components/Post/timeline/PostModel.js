@@ -20,6 +20,7 @@ export default function PostComponent({
 	name,
 	description,
 	reposted_by,
+	reposted_by_name,
 	origin_post_id,
 	url_metadata,
 	liked,
@@ -113,7 +114,7 @@ export default function PostComponent({
 				<ShareBar>
 					<div>
 						<img src="assets/share.svg"/>
-						<p>Re-posted by <span>{reposted_by}</span></p>
+						<p>Re-posted by <span>{userId == reposted_by ? "You":reposted_by_name}</span></p>
 					</div>
 				</ShareBar>
 			}
@@ -514,5 +515,9 @@ const ShareBar = styled.div`
 
 	span{
 		font-weight: 700;
+	}
+
+	@media(max-width:611px){
+		width: 100vw;
 	}
 `

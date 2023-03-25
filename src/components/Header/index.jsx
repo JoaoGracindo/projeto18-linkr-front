@@ -9,7 +9,8 @@ import SearchBar from "../SearchBar/SearchBar";
 
 export default function Header() {
 	const [clicked, setClicked] = useState(false);
-	const { token, img } = useContext(TokenContext);
+	const token = JSON.parse(localStorage.token);
+	const img = JSON.parse(localStorage.img)
 	const navigate = useNavigate();
 
 	function click() {
