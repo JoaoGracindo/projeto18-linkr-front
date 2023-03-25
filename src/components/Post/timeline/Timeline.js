@@ -34,7 +34,8 @@ export default function Timeline() {
     axios
       .get(`${url}/timeline`, config)
       .then((response) => {
-        setTimeline([...response.data]);
+        setTimeline([...response.data])
+        console.log([...response.data]);
       })
       .catch((err) => {
         alert(
