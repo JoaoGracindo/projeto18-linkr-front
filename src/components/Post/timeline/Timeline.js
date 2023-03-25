@@ -17,7 +17,7 @@ export default function Timeline() {
   const [link, setLink] = useState("");
   const [description, setDescription] = useState("");
   const token = JSON.parse(localStorage.token);
-  const { img } = useContext(TokenContext)
+  const img = JSON.parse(localStorage.img)
 
   const config = {
     headers: {
