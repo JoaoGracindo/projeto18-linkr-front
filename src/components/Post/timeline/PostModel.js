@@ -135,8 +135,9 @@ export default function PostComponent({
 				<CommentButton />
 				<ShareButton
 					post_id={id}
+					origin={origin_post_id}
 					count={repost_count}
-					setTimeline={setTimeline}
+					refreshTimeline={refreshTimeline}
 				/>
 			</div>
 			<div className="rightWrapper">
