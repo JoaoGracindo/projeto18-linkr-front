@@ -7,7 +7,7 @@ import { useState } from "react";
 
 export default function ShareButton(props){
 
-  const { post_id, setTimeline } = props
+  const { post_id,count,setTimeline } = props
 
   const url = process.env.REACT_APP_API_URL
   const token = JSON.parse(localStorage.token);
@@ -57,7 +57,7 @@ export default function ShareButton(props){
       <>
         <ShareStyled onClick={openModal}>
             <img src="assets/share.svg" alt="share"/>
-            <p>0 re-posts</p>
+            <p>{count} re-posts</p>
         </ShareStyled>
         <Modal
               isOpen={modalIsOpen}

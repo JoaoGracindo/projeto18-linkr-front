@@ -22,6 +22,7 @@ export default function PostComponent({
 	reposted_by,
 	reposted_by_name,
 	origin_post_id,
+	repost_count,
 	url_metadata,
 	liked,
 	likersNames,
@@ -134,6 +135,7 @@ export default function PostComponent({
 				<CommentButton />
 				<ShareButton
 					post_id={id}
+					count={repost_count}
 					setTimeline={setTimeline}
 				/>
 			</div>
