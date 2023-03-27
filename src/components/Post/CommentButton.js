@@ -1,15 +1,25 @@
+import axios from "axios";
 import { AiOutlineComment } from "react-icons/ai";
 import styled from "styled-components";
 
-const commentButtonStyle = {
-	color: "red",
-	width: "25px",
-	height: "25px",
-};
 
-export default function CommentButton({ commentsCount, post_id }) {
+export default function CommentButton({ commentsCount, id, setComments, setShowComments }) {
+	const url = process.env.REACT_APP_API_URL;
+
+	function getComments(){
+		axios
+			.get(`${url}/comment/${id}`)
+			.then(response => {
+				setComments([...response.data]);
+				setShowComments(true);
+
+			})
+			.catch(err => {
+				console.log(err)
+			})
+	}
 	return (
-		<Container>
+		<Container onClick={getComments}>
 			<AiOutlineComment />
 			<p>{commentsCount} comments</p>
 		</Container>
@@ -17,9 +27,9 @@ export default function CommentButton({ commentsCount, post_id }) {
 }
 
 const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin-top:10px;
+	display: flex;
+	flex-direction: column;
+	margin-top: 10px;
 
 	svg {
 		font-size: 25px;
