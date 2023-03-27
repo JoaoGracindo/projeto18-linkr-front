@@ -327,8 +327,8 @@ const CommentsContainer = styled.div`
 		if (!props.show) return "display: none;";
 	}}
 	position: absolute;
-	padding-top: 30px;
-	top: 260px;
+	padding-top: 5%;
+	top: 95%;
 	width: 100%;
 	height: fit-content;
 	z-index: -1;
@@ -401,6 +401,7 @@ const CommentsContainer = styled.div`
 		width: 40px;
 		border-radius: 50%;
 	}
+
 `;
 
 const StyledPost = styled.div`
