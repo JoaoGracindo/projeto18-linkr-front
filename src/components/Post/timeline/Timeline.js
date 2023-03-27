@@ -11,13 +11,21 @@ import { UserPageContainer } from "../../../pages/UserPage/style";
 import SearchBar from "../../SearchBar/SearchBar";
 import { TitleContainer } from "../../../styles/TitleContainer";
 import { TokenContext } from "../../../context/UserContext";
+import RefreshButton from "./RefreshPosts/RefreshButton";
+import refreshPosts from "./RefreshPosts/request";
+import useInterval from "use-interval";
+import dayjs from "dayjs";
 
 export default function Timeline() {
+  const [newestTimestamp, setNewestTimestamp] = useState();
+  const [oldestTimestamp, setOldestTimestamp] = useState();
   const [timeline, setTimeline] = useState([]);
+  const [newPosts, setNewPosts] = useState([])
   const [link, setLink] = useState("");
   const [description, setDescription] = useState("");
   const token = JSON.parse(localStorage.token);
-  const { img } = useContext(TokenContext)
+  const { img } = useContext(TokenContext);
+  const [loading, setLoading] = useState(false);
 
   const config = {
     headers: {
@@ -34,8 +42,9 @@ export default function Timeline() {
     axios
       .get(`${url}/timeline`, config)
       .then((response) => {
-        setTimeline([...response.data])
-        console.log([...response.data]);
+        setTimeline([...response.data]);
+        setNewestTimestamp(dayjs(response.data[0].created_at).subtract(3, 'hour').add(1, 'second').toISOString());
+        setOldestTimestamp(dayjs(response.data[response.data.length - 1].created_at).subtract(3, 'hour').add(1, 'second').toISOString());
       })
       .catch((err) => {
         alert(
@@ -62,6 +71,22 @@ export default function Timeline() {
     setLink("");
     setDescription("");
   }
+  useInterval(() => {
+    refreshPosts({
+      page: "timeline",
+      refresh_type: "top",
+      newestTimestamp,
+      oldestTimestamp,
+      setNewestTimestamp,
+      setOldestTimestamp,
+      setLoading,
+      timeline,
+      setTimeline,
+      newPosts,
+      setNewPosts,
+      token,
+    });
+  }, 5000);
 
   if (!timeline) return <>Loading</>;
 
@@ -69,16 +94,13 @@ export default function Timeline() {
     <>
       <Header />
       <UserPageContainer>
-		<SearchBar />
+        <SearchBar />
         <TitleContainer>timeline</TitleContainer>
         <FeedContainer>
           <FeedWrapper>
             <StyledPost>
               <div>
-                <img
-                  src={img}
-                  alt="vilao"
-                />
+                <img src={img} alt="vilao" />
                 <p>What are you going to share today?</p>
               </div>
               <form onSubmit={handleForm}>
@@ -97,6 +119,7 @@ export default function Timeline() {
                 <button type="submit">Publish</button>
               </form>
             </StyledPost>
+            {newPosts[0]  && <RefreshButton loading={loading} timeline={timeline} newPosts={newPosts} setTimeline={setTimeline} setNewPosts={setNewPosts}/>}
             {timeline.map((object) => (
               <PostBox key={object.id} {...object} setTimeline={setTimeline} />
             ))}
