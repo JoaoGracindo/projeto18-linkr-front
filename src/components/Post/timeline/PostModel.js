@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { GoPencil } from "react-icons/go";
 import { FiTrash2 } from "react-icons/fi";
-import { AiOutlineComment } from "react-icons/ai";
+import { SlPaperPlane } from "react-icons/sl";
 import axios from "axios";
 import Modal from "react-modal";
 
@@ -20,11 +20,14 @@ export default function PostComponent({
 	name,
 	description,
 	reposted_by,
+	reposted_by_name,
 	origin_post_id,
+	repost_count,
 	url_metadata,
 	liked,
 	likersNames,
 	likesCount,
+	commentsCount,
 	setTimeline,
 }) {
 	const [modalIsOpen, setIsOpen] = useState(false);
@@ -33,7 +36,11 @@ export default function PostComponent({
 	const [shownDescription, setShownDescription] = useState(description);
 	const [disable, setDisable] = useState(false);
 	const [loading, setLoading] = useState(false);
+	const [comments, setComments] = useState([]);
+	const [showComments, setShowComments] = useState(false);
+	const [newComment, setNewComment] = useState("");
 
+	const userImg = JSON.parse(localStorage.img);
 	const token = JSON.parse(localStorage.token);
 	const config = {
 		headers: {
@@ -106,17 +113,31 @@ export default function PostComponent({
 			});
 	}
 
+	function postComment() {
+		axios
+		.post(`${url}/comment/${id}`, {comment: newComment}, config)
+		.then((response) => {
+			setComments([...response.data]);
+			setNewComment("");
+		})
+		.catch((err) => {
+			alert(err);
+		});
+	}
+
 	return (
 		<StyledPost notOwner={owner !== userId}>
-
-			{reposted_by && 
+			{reposted_by && (
 				<ShareBar>
 					<div>
-						<img src="assets/share.svg"/>
-						<p>Re-posted by <span>{reposted_by}</span></p>
+						<img src="assets/share.svg" />
+						<p>
+							Re-posted by{" "}
+							<span>{userId == reposted_by ? "You" : reposted_by_name}</span>
+						</p>
 					</div>
 				</ShareBar>
-			}
+			)}
 
 			<div className="leftContainer">
 				<img
@@ -130,10 +151,17 @@ export default function PostComponent({
 					likersNames={likersNames}
 					likesCount={likesCount}
 				/>
-				<CommentButton />
+				<CommentButton
+					setComments={setComments}
+					id={id}
+					commentsCount={commentsCount}
+					setShowComments={setShowComments}
+				/>
 				<ShareButton
 					post_id={id}
-					setTimeline={setTimeline}
+					origin={origin_post_id}
+					count={repost_count}
+					refreshTimeline={refreshTimeline}
 				/>
 			</div>
 			<div className="rightWrapper">
@@ -191,6 +219,30 @@ export default function PostComponent({
 					</div>
 				</div>
 			</div>
+			<CommentsContainer show={showComments}>
+				{comments.map((obj, index) => {
+					return (
+						<div
+							key={index}
+							className="comment">
+							<img src={obj.pic_url} />
+							<div>
+								<h1>{obj.name}</h1>
+								<p>{obj.comment}</p>
+							</div>
+						</div>
+					);
+				})}
+				<div className="input">
+					<img src={userImg} />
+					<input
+						placeholder="write a comment..."
+						onChange={(e) => setNewComment(e.target.value)}
+						value={newComment}
+					/>
+					<SlPaperPlane onClick={postComment}/>
+				</div>
+			</CommentsContainer>
 			<Modal
 				isOpen={modalIsOpen}
 				onRequestClose={closeModal}
@@ -271,6 +323,88 @@ const modalConfirm = {
 	color: "#FFFFFF",
 };
 
+const CommentsContainer = styled.div`
+	${(props) => {
+		if (!props.show) return "display: none;";
+	}}
+	position: absolute;
+	padding-top: 5%;
+	top: 95%;
+	width: 100%;
+	height: fit-content;
+	z-index: -1;
+	background-color: #1e1e1e;
+	border-bottom-left-radius: 16px;
+	border-bottom-right-radius: 16px;
+
+	.comment {
+		display: flex;
+		align-items: center;
+		margin-left: 25px;
+		margin-right: 25px;
+		min-height: 70px;
+		border-bottom: 1px solid #353535;
+
+		div {
+			margin-left: 18px;
+		}
+
+		h1 {
+			font-weight: 700;
+			font-size: 14px;
+			line-height: 17px;
+			color: #f3f3f3;
+			margin-bottom: 3px;
+		}
+
+		p {
+			font-weight: 400;
+			font-size: 14px;
+			line-height: 17px;
+			color: #acacac;
+		}
+	}
+
+	.input {
+		display: flex;
+		align-items: center;
+		margin-left: 25px;
+		margin-right: 25px;
+		height: 70px;
+
+		input {
+			margin-left: 18px;
+			margin-right: 18px;
+			width: 100%;
+			background: #252525;
+			border-radius: 8px;
+			padding-left: 15px;
+			padding-right: 13px;
+			font-style: italic;
+			font-weight: 400;
+			font-size: 14px;
+			line-height: 17px;
+			letter-spacing: 0.05em;
+			color: white;
+			border: none;
+			height: 40px;
+		}
+
+		svg {
+			font-size: 25px;
+			color: white;
+			cursor: pointer;
+		}
+	}
+
+	img {
+		height: 40px;
+		width: 40px;
+		border-radius: 50%;
+	}
+
+`;
+
 const StyledPost = styled.div`
 	width: 611px;
 	height: fit-content;
@@ -280,7 +414,6 @@ const StyledPost = styled.div`
 	font-family: Lato, "sans-serif";
 	color: white;
 	position: relative;
-	margin-top: 50px;
 
 	.editInput {
 		box-sizing: border-box;
@@ -488,31 +621,34 @@ const ShareBar = styled.div`
 	position: absolute;
 	top: -33px;
 	left: 0px;
-	background-color: #1E1E1E;
+	background-color: #1e1e1e;
 	border-radius: 16px 16px 0px 0px;
 	z-index: -1;
 
-	div{
+	div {
 		display: flex;
 		align-items: center;
 		margin: 11px 13px;
-
 	}
 
-	img{
+	img {
 		width: 20px;
 		height: 12px;
 		margin-right: 6px;
 	}
 
-	p{
-		font-family: 'Lato';
+	p {
+		font-family: "Lato";
 		font-size: 11px;
 		line-height: 13px;
-		color: #FFFFFF;
+		color: #ffffff;
 	}
 
-	span{
+	span {
 		font-weight: 700;
 	}
-`
+
+	@media (max-width: 611px) {
+		width: 100vw;
+	}
+`;

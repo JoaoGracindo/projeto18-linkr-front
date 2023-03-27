@@ -24,7 +24,7 @@ export default function Timeline() {
   const [link, setLink] = useState("");
   const [description, setDescription] = useState("");
   const token = JSON.parse(localStorage.token);
-  const { img } = useContext(TokenContext);
+  const img = JSON.parse(localStorage.img);
   const [loading, setLoading] = useState(false);
 
   const config = {
@@ -140,7 +140,7 @@ const StyledPost = styled.div`
   background-color: white;
   position: relative;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  margin-bottom: 13px;
+  margin-bottom: 50px;
 
   img {
     width: 50px;

@@ -7,7 +7,7 @@ import { useState } from "react";
 
 export default function ShareButton(props){
 
-  const { post_id, setTimeline } = props
+  const { post_id,count,refreshTimeline, origin } = props
 
   const url = process.env.REACT_APP_API_URL
   const token = JSON.parse(localStorage.token);
@@ -29,8 +29,9 @@ export default function ShareButton(props){
 		setIsOpen(false);
 	}
 
-  function share(post_id){
-    axios
+  function share(post_id,origin){
+    if(!origin){
+      axios
 			.post(`${url}/repost-link`, {user_id,post_id} ,config)
 			.then((response) => {
 				console.log(response);
@@ -38,26 +39,28 @@ export default function ShareButton(props){
 			.catch((response) => {
 				console.log(response);
 				alert("Cannot repost this post. Try again later.");
-			});
+			});}
 
-
+    else{
       axios
-			.get(`${url}/timeline`, config)
+			.post(`${url}/repost-link`, {user_id,post_id:origin} ,config)
 			.then((response) => {
-				setTimeline([...response.data]);
+				console.log(response);
 			})
-			.catch((err) => {
-				alert(
-					"An error occured while trying to fetch the posts, please refresh the page"
-				);
+			.catch((response) => {
+				console.log(response);
+				alert("Cannot repost this post. Try again later.");
 			});
+    }
+
+    refreshTimeline()
   }
 
     return(
       <>
         <ShareStyled onClick={openModal}>
             <img src="assets/share.svg" alt="share"/>
-            <p>0 re-posts</p>
+            <p>{count} re-posts</p>
         </ShareStyled>
         <Modal
               isOpen={modalIsOpen}
@@ -75,7 +78,7 @@ export default function ShareButton(props){
                 <button
                   style={modalConfirm}
                   onClick={() => {
-                    share(post_id)
+                    share(post_id,origin)
                     closeModal()
                     }}>
                   Yes, share!
